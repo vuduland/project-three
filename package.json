@@ -11,7 +11,7 @@
     "react-scripts": "3.3.1"
   },
   "devDependencies": {
-    "yarn": "^1.21.1"
+    "yarn": "^1.22.0"
   },
   "scripts": {
     "start": "react-scripts start",
