@@ -8,15 +8,14 @@ const mapStyles = {
 
 export class MapContainer extends Component {
   render() {
-    console.log(process.env.REACT_APP_MAP_APIKEY)
     return (
       <Map
         google={this.props.google}
         zoom={18}
         style={mapStyles}
         initialCenter={{
-         lat: 39.0997,
-         lng: -94.5786
+          lat: 39.0997,
+          lng: -94.5786
         }}
       />
     );
@@ -25,5 +24,4 @@ export class MapContainer extends Component {
 
 export default GoogleApiWrapper({
   apiKey: process.env.REACT_APP_MAP_APIKEY
-  
 })(MapContainer);
