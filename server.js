@@ -11,10 +11,11 @@ const client = new MongoClient(uri, {
   useUnifiedTopology: true
 });
 client.connect(err => {
-  const collection = client
-    .db('sample_airbnb')
-    .collection('listingsAndReviews');
-  console.log(collection + 'hi');
+  const collection = client.db('heroku_ztzn9n3k').collection('test');
+
+  console.log(
+    'referencing ' + collection.foo + ' in the database. connected. hi.'
+  );
   // perform actions on the collection object
   client.close();
 });
