@@ -21,6 +21,21 @@ client.connect(err => {
   client.close();
 });
 
+const uri = process.env.MONGO_URI;
+const client = new MongoClient(uri, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
+client.connect(err => {
+  const collection = client.db('heroku_ztzn9n3k').collection('test');
+
+  console.log(
+    'referencing ' + collection.foo + ' in the database. connected. hi.'
+  );
+  // perform actions on the collection object
+  client.close();
+});
+
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
