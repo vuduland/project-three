@@ -8,6 +8,7 @@ const mapStyles = {
 
 export class MapContainer extends Component {
   render() {
+    console.log(process.env.REACT_APP_MAP_APIKEY)
     return (
       <Map
         google={this.props.google}
@@ -23,5 +24,6 @@ export class MapContainer extends Component {
 }
 
 export default GoogleApiWrapper({
-  apiKey: process.env.MAP_APIKEY
+  apiKey: process.env.REACT_APP_MAP_APIKEY
+  
 })(MapContainer);
