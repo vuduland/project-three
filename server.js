@@ -12,6 +12,10 @@ const client = new MongoClient(uri, {
   useUnifiedTopology: true
 });
 client.connect(err => {
+  // if (err) {
+  //   console.log(err)
+  // }
+  // else {
   const collection = client.db('heroku_ztzn9n3k').collection('test');
 
   console.log(
@@ -19,6 +23,7 @@ client.connect(err => {
   );
   // perform actions on the collection object
   client.close();
+  // };
 });
 
 // Serve up static assets (usually on heroku)
