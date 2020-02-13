@@ -85,6 +85,7 @@ export class CurrentLocation extends React.Component {
       // maps.Map() is constructor that instantiates the map
       this.map = new maps.Map(node, mapConfig);
     }
+
   }
 
   renderChildren() {
@@ -114,7 +115,6 @@ export class CurrentLocation extends React.Component {
    );
  }
 }
-export default CurrentLocation;
 
 CurrentLocation.defaultProps = {
   zoom: 14,
@@ -125,3 +125,5 @@ CurrentLocation.defaultProps = {
   centerAroundCurrentLocation: false,
   visible: true
 };
+
+export default CurrentLocation;
