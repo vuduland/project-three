@@ -16,12 +16,12 @@ client.connect(err => {
     console.log(err);
   } else {
     const collection = client.db('kc-cleanup').collection('Users');
-    collection.insertOne({
-      item: 'canvas',
-      qty: 100,
-      tags: ['cotton'],
-      size: { h: 28, w: 35.5, uom: 'cm' }
-    });
+//     collection.insertOne({	
+//       item: 'canvas',	
+//       qty: 100,	
+//       tags: ['cotton'],	
+//       size: { h: 28, w: 35.5, uom: 'cm' }	
+//     });
     console.log(`referencing ${collection} in the database. connected. hi.`);
   }
 });
