@@ -4,9 +4,9 @@ const path = require('path');
 const PORT = process.env.PORT || 3000;
 const MongoClient = require('mongodb').MongoClient;
 const app = express();
-require('dotenv').config();
 
 const uri = process.env.MONGODB_URI;
+
 const client = new MongoClient(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true
@@ -15,15 +15,14 @@ client.connect(err => {
   if (err) {
     console.log(err);
   } else {
-    const collection = client
-      .db('kc-cleanup')
-      .collection('trash-tag-COLLECTION');
-
-    console.log(
-      'referencing ' + collection.foo + ' in the database. connected. hi.'
-    );
-    // perform actions on the collection object
-    client.close();
+    const collection = client.db('kc-cleanup').collection('Users');
+    collection.insertOne({
+      item: 'canvas',
+      qty: 100,
+      tags: ['cotton'],
+      size: { h: 28, w: 35.5, uom: 'cm' }
+    });
+    console.log(`referencing ${collection} in the database. connected. hi.`);
   }
 });
 
