@@ -4,7 +4,7 @@ const path = require('path');
 const PORT = process.env.PORT || 3000;
 const MongoClient = require('mongodb').MongoClient;
 const app = express();
-require('dotenv').config()
+require('dotenv').config();
 
 const uri = process.env.MONGODB_URI;
 const client = new MongoClient(uri, {
@@ -12,18 +12,19 @@ const client = new MongoClient(uri, {
   useUnifiedTopology: true
 });
 client.connect(err => {
-  // if (err) {
-  //   console.log(err)
-  // }
-  // else {
-  const collection = client.db('heroku_ztzn9n3k').collection('test');
+  if (err) {
+    console.log(err);
+  } else {
+    const collection = client
+      .db('kc-cleanup')
+      .collection('trash-tag-COLLECTION');
 
-  console.log(
-    'referencing ' + collection.foo + ' in the database. connected. hi.'
-  );
-  // perform actions on the collection object
-  client.close();
-  // };
+    console.log(
+      'referencing ' + collection.foo + ' in the database. connected. hi.'
+    );
+    // perform actions on the collection object
+    client.close();
+  }
 });
 
 // Serve up static assets (usually on heroku)
@@ -36,7 +37,7 @@ if (process.env.NODE_ENV === 'production') {
 app.get('*', function(req, res) {
   res.sendFile(path.join(__dirname, './client/build/index.html'));
   if (res) {
-    console.log('CONNECTED TO NETWORK MAYBE')
+    console.log('CONNECTED TO NETWORK MAYBE');
   }
 });
 

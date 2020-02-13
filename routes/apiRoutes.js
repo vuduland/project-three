@@ -12,4 +12,4 @@ router.post('/pins', (req, res, next) => {});
 
 router.delete('/pins/:id', (req, res, next) => {});
 
-module.exports = router;
+export const router = router;
