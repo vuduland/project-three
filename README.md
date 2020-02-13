@@ -1,6 +1,6 @@
 ADD .ENV TO THE ROOT FOLDER:
 
-MONGODB_URI="mongodb+srv://victorAdmin:ki833Rx5XQJaeNp4@cluster0-axjuw.mongodb.net/test?retryWrites=true&w=majority"
+MONGODB_URI="mongodb+srv://<username>:<password>@cluster0-axjuw.mongodb.net/kc-cleanup?retryWrites=true&w=majority"
 
 PORT="8080"
 
