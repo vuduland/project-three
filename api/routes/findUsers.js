@@ -14,7 +14,7 @@ module.exports = app => {
                 res.status(200).send({
                     auth: true,
                     username: user.username,
-                    passworkd: user.password,
+                    password: user.password,
                     email: user.email,
                     message: 'user found in db',
                 });
