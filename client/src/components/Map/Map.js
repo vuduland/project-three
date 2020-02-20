@@ -103,7 +103,8 @@ export class CurrentLocation extends React.Component {
   }
 
   render() {
-    const style = Object.assign({}, mapStyles.map);
+
+    const style = Object.assign({}, mapStyles.map); // this is where we can style the map
     return (
       <div>
         <div style={style} ref='map'>
