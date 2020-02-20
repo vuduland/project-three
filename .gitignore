@@ -4,4 +4,5 @@
 .DS_Store
 .env
 untitled.js
+../../jwtConfig.js
 api/config/jwtConfig.js
