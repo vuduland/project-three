@@ -5,6 +5,7 @@
   "proxy": "http://localhost:3000/",
   "dependencies": {
     "classnames": "^2.2.6",
+    "express": "^4.17.1",
     "google-maps-react": "2.0.2",
     "materialize-css": "^1.0.0-rc.2",
     "materialize-js": "1.0.0",
