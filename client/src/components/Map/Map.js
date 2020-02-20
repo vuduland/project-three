@@ -103,6 +103,7 @@ export class CurrentLocation extends React.Component {
   }
 
   render() {
+
     const style = Object.assign({}, mapStyles.map); // this is where we can style the map
     return (
       <div>
@@ -118,8 +119,8 @@ export class CurrentLocation extends React.Component {
 CurrentLocation.defaultProps = {
   zoom: 14,
   initialCenter: {
-    lat: -1.2884,
-    lng: 36.8233
+    lat: -94.58777,
+    lng: 39.08533
   },
   centerAroundCurrentLocation: false,
   visible: true
