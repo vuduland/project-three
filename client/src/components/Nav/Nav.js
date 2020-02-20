@@ -19,7 +19,7 @@ function Nav() {
         onOpenEnd: null,
         onOpenStart: null,
         outDuration: 200,
-        preventScrolling: true
+        preventScrolling: false
       }}
       sidenav={<li>Custom node!</li>}
     >
