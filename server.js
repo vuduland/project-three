@@ -1,7 +1,7 @@
 const express = require('express');
 require('dotenv').config();
 const path = require('path');
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 const MongoClient = require('mongodb').MongoClient;
 const app = express();
 
@@ -16,12 +16,12 @@ client.connect(err => {
     console.log(err);
   } else {
     const collection = client.db('kc-cleanup').collection('Users');
-//     collection.insertOne({	
-//       item: 'canvas',	
-//       qty: 100,	
-//       tags: ['cotton'],	
-//       size: { h: 28, w: 35.5, uom: 'cm' }	
-//     });
+    //     collection.insertOne({
+    //       item: 'canvas',
+    //       qty: 100,
+    //       tags: ['cotton'],
+    //       size: { h: 28, w: 35.5, uom: 'cm' }
+    //     });
     console.log(`referencing ${collection} in the database. connected. hi.`);
   }
 });
