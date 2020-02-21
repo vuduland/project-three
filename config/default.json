@@ -1,0 +1,4 @@
+{
+  "mongoURI": "mongodb+srv://victorAdmin:ki833Rx5XQJaeNp4@cluster0-axjuw.mongodb.net/kc-cleanup?retryWrites=true&w=majority",
+  "jwtSecret": "paranoid-ANDROID"
+}
