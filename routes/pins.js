@@ -3,8 +3,8 @@ const router = express.Router();
 const auth = require('../middleware/auth');
 const { check, validationResult } = require('express-validator/check');
 
-const User = require('../models/User');
-const Pin = require('../models/Pin');
+const User = require('../models/userModel');
+const Pin = require('../models/trashtagModel');
 
 // @route     GET api/pins
 // @desc      Get all users pins
