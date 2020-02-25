@@ -5,14 +5,22 @@ const PinSchema = new Schema({
   address: {
     type: String
   },
-  lat: {
-    type: String,
-    required: [true, 'Latitude is Required']
-    // default: // add current location here?
+  location: {
+    lat: {
+      type: String,
+      required: true
+    },
+    lng: {
+      type: String,
+      required: true
+    }
   },
-  long: {
+  id: {
+    type: Schema.Types.ObjectId
+  },
+  type: {
     type: String,
-    required: [true, 'Longitude is Required']
+    default: 'trashed' // alternate is cleaned
   },
   date: {
     type: Date
