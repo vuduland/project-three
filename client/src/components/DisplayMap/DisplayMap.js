@@ -1,13 +1,42 @@
 import React, { Component } from 'react';
 import { GoogleApiWrapper, InfoWindow, Marker } from 'google-maps-react';
 import CurrentLocation from '../Map/Map';
+// import Pins from '../../../../scripts/seedy.json'
+
+
+
 
 export class MapContainer extends Component {
   state = {
     showingInfoWindow: false, //Hides or the shows the infoWindow
     activeMarker: {}, //Shows the active marker upon click
-    selectedPlace: {} //Shows the infoWindow to the selected place upon a marker
+    selectedPlace: {}, //Shows the infoWindow to the selected place upon a marker
+    data: [
+      {
+        id: "1",
+        address: "123 Addressme, Oregon",
+        lat: 38.901016,
+        lng: -94.730249,
+        url: "alice@abc.com"
+      },
+      {
+        id: "2",
+        address: "123 Addressthem, Oregon",
+        lat: 38.898524,
+        lng: -94.725154,
+        url: "aliceabc.com"
+      },
+      {
+        id: "3",
+        address: "123 Addressyou, Oregon",
+        lat: 38.901123,
+        lng: -94.720018,
+        url: "alice@abc.com"
+      }
+    ]
   };
+
+
 
   onMarkerClick = (props, marker, e) =>
     this.setState({
@@ -28,17 +57,26 @@ export class MapContainer extends Component {
   render() {
     return (
       <CurrentLocation centerAroundCurrentLocation google={this.props.google}>
-        <Marker onClick={this.onMarkerClick} name={'current location'} />
+        { //curly brace here lets you write javscript in JSX
+          this.state.data.map(item =>
+            <Marker
+              key={item.id}
+              address={item.address}
+              url={item.url}
+              position={{ lat: item.lat, lng: item.lng }}
+            />
+          )
+        }
         <InfoWindow
           marker={this.state.activeMarker}
-          visible={this.state.showingInfoWindow}
-          onClose={this.onClose}
-        >
+          onOpen={this.windowHasOpened}
+          onClose={this.windowHasClosed}
+          visible={this.state.showingInfoWindow}>
           <div>
-            <h4>{this.state.selectedPlace.name}</h4>
+            <h1>{this.state.selectedPlace.url}</h1>
           </div>
         </InfoWindow>
-      </CurrentLocation>
+      </CurrentLocation >
     );
   }
 }
