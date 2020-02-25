@@ -23,7 +23,8 @@ const PinSchema = new Schema({
     default: 'trashed' // alternate is cleaned
   },
   date: {
-    type: Date
+    type: Date,
+    default: Date.now
   }
 });
 

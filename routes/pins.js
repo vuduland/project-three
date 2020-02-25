@@ -46,14 +46,16 @@ router.post(
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-
-    const { address, date, type } = req.body;
+    // how do we pull this data from the pic's metadata? and how do we link it here?
+    const { address, location, date, type } = req.body;
 
     try {
       const newPin = new Pin({
         address,
-        location: req.lat,
-        location: req.lng,
+        location,
+        // or:
+        // location: req.lat,
+        // location: req.lng
         id: req.id.id,
         date,
         type
@@ -73,14 +75,14 @@ router.post(
 // @desc    Update contact === pin
 // @access  Private or public?
 router.put('/:id', auth, async (req, res) => {
-  const { name, email, phone, type } = req.body;
+  const { address, location, date, type } = req.body;
 
-  // Build contact object
-  const contactFields = {};
-  if (name) contactFields.name = name;
-  if (email) contactFields.email = email;
-  if (phone) contactFields.phone = phone;
-  if (type) contactFields.type = type;
+  // Build pin object  !!!! PAUSED REFACTORING HERE !!!
+  const pinFields = {};
+  if (address) pinFields.address = address;
+  if (location) pinFields.location = location;
+  if (phone) pinFields.phone = phone;
+  if (type) pinFields.type = type;
 
   try {
     let contact = await Contact.findById(req.params.id);
