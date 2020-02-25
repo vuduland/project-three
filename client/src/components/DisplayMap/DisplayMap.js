@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { GoogleApiWrapper, InfoWindow, Marker } from 'google-maps-react';
 import CurrentLocation from '../Map/Map';
+import { Row, Col, Card, Icon, CardTitle } from 'react-materialize';
 // import Pins from '../../../../scripts/seedy.json'
 
 
@@ -14,24 +15,24 @@ export class MapContainer extends Component {
     data: [
       {
         id: "1",
-        address: "123 Addressme, Oregon",
+        comment: "This was dumped here on tuesday",
         lat: 38.901016,
         lng: -94.730249,
-        url: "alice@abc.com"
+        url: "https://picsum.photos/200/300/?blur"
       },
       {
         id: "2",
-        address: "123 Addressthem, Oregon",
+        comment: "Hey this needs to be cleaned up",
         lat: 38.898524,
         lng: -94.725154,
-        url: "aliceabc.com"
+        url: "https://picsum.photos/id/870/200/300?grayscale&blur=2"
       },
       {
         id: "3",
-        address: "123 Addressyou, Oregon",
+        comment: "Who wants to get some Karma #Trashtag # reddit",
         lat: 38.901123,
         lng: -94.720018,
-        url: "alice@abc.com"
+        url: "https://picsum.photos/200/300?grayscale"
       }
     ]
   };
@@ -60,6 +61,7 @@ export class MapContainer extends Component {
         { //curly brace here lets you write javscript in JSX
           this.state.data.map(item =>
             <Marker
+              onClick={this.onMarkerClick}
               key={item.id}
               address={item.address}
               url={item.url}
@@ -68,12 +70,32 @@ export class MapContainer extends Component {
           )
         }
         <InfoWindow
+          onClick={this.onClose}
           marker={this.state.activeMarker}
           onOpen={this.windowHasOpened}
           onClose={this.windowHasClosed}
           visible={this.state.showingInfoWindow}>
+          <Row>
+            <Col
+              m={6}
+              s={12}
+            >
+              <Card
+                actions={[
+                  <a key="1" href="#">Test</a>
+                ]}
+                closeIcon={<Icon>close</Icon>}
+                header={<CardTitle image={this.state.selectedPlace.url} />}
+                horizontal
+                revealIcon={<Icon>more_vert</Icon>}
+              >
+                {this.state.selectedPlace.comment}
+              </Card>
+            </Col>
+          </Row>
           <div>
-            <h1>{this.state.selectedPlace.url}</h1>
+            <h5></h5>
+
           </div>
         </InfoWindow>
       </CurrentLocation >
