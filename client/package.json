@@ -4,7 +4,9 @@
   "private": true,
   "proxy": "http://localhost:3000/",
   "dependencies": {
+    "braces": "^2.3.1",
     "classnames": "^2.2.6",
+    "express": "^4.17.1",
     "google-maps-react": "2.0.2",
     "materialize-css": "^1.0.0-rc.2",
     "materialize-js": "1.0.0",
@@ -16,6 +18,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "install": "cd ../api && npm install",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"

@@ -1,6 +1,9 @@
 # dependencies
-**/node_modules
+node_modules/
 # misc
 .DS_Store
 .env
-
+client/build/
+untitled.js
+../../jwtConfig.js
+api/config/jwtConfig.js

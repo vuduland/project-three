@@ -1,0 +1,4 @@
+{
+  "mongoURI": "mongodb+srv://victorAdmin:ki833Rx5XQJaeNp4@cluster0-thnnb.mongodb.net/test?retryWrites=true&w=majority",
+  "jwtSecret": "Tank_We_Need_An_Exit"
+}

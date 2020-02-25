@@ -85,7 +85,6 @@ export class CurrentLocation extends React.Component {
       // maps.Map() is constructor that instantiates the map
       this.map = new maps.Map(node, mapConfig);
     }
-
   }
 
   renderChildren() {
@@ -104,23 +103,24 @@ export class CurrentLocation extends React.Component {
   }
 
   render() {
-    const style = Object.assign({}, mapStyles.map);
-   return (
-     <div>
-       <div style={style} ref="map">
-         Loading map...
-       </div>
-       {this.renderChildren()}
-     </div>
-   );
- }
+
+    const style = Object.assign({}, mapStyles.map); // this is where we can style the map
+    return (
+      <div>
+        <div style={style} ref='map'>
+          Loading map...
+        </div>
+        {this.renderChildren()}
+      </div>
+    );
+  }
 }
 
 CurrentLocation.defaultProps = {
   zoom: 14,
   initialCenter: {
-    lat: -1.2884,
-    lng: 36.8233
+    lat: -94.58777,
+    lng: 39.08533
   },
   centerAroundCurrentLocation: false,
   visible: true
