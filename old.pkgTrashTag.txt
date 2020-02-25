@@ -1,0 +1,32 @@
+{
+  "name": "mern",
+  "version": "1.0.0",
+  "description": "Mern Demo",
+  "main": "server.js",
+  "scripts": {
+    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+    "start:prod": "node server.js",
+    "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
+    "client": "cd client && npm run start",
+    "seed": "node scripts/seedDB.js",
+    "install": "cd client && npm install",
+    "build": "cd client && npm run build",
+    "heroku-postbuild": "npm run build"
+  },
+  "author": "Delia Bouhan, Jay Smith, Peter Smith, & Victor Uland",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^4.1.0",
+    "nodemon": "^2.0.1-alpha.3"
+  },
+  "dependencies": {
+    "braces": ">=2.3.1",
+    "dotenv": "^8.2.0",
+    "express": "^4.16.3",
+    "google-maps-react": "^2.0.2",
+    "if-env": "^1.0.4",
+    "materialize-css": "^1.0.0-rc.2",
+    "mongodb": "^3.5.2",
+    "mongoose": "^5.8.11"
+  }
+}
