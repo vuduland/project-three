@@ -12,7 +12,8 @@ const Pin = require('../models/Pin');
 // @access  Private
 router.get('/', auth, async (req, res) => {
   try {
-    const pins = await Pin.find({ location: req.lat, location: req.lng }).sort(
+    // or { location: req.lat, location: req.lng }
+    const pins = await Pin.find({ location }).sort(
       // sorts by date, descending order?
       {
         date: -1
@@ -52,7 +53,7 @@ router.post(
     try {
       const newPin = new Pin({
         address,
-        location,
+        lat: lat,
         // or:
         // location: req.lat,
         // location: req.lng
