@@ -48,16 +48,16 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
     // how do we pull this data from the pic's metadata? and how do we link it here?
-    const { address, location, date, type } = req.body;
+    const { lat, lng, date, type } = req.body;
 
     try {
       const newPin = new Pin({
-        address,
-        lat: lat,
+        lat,
+        lng,
         // or:
         // location: req.lat,
         // location: req.lng
-        id: req.id.id,
+        objId: req.objId.id,
         date,
         type
       });
@@ -76,31 +76,32 @@ router.post(
 // @desc    Update contact === pin
 // @access  Private or public?
 router.put('/:id', auth, async (req, res) => {
-  const { address, location, date, type } = req.body;
+  const { lat, lng, date, type } = req.body;
 
   // Build pin object  !!!! PAUSED REFACTORING HERE !!!
   const pinFields = {};
-  if (address) pinFields.address = address;
-  if (location) pinFields.location = location;
-  if (phone) pinFields.phone = phone;
+  // if (address) pinFields.address = address;
+  if (lat) pinFields.lat = lat;
+  if (lng) pinFields.lng = lng;
+  if (date) pinFields.date = date;
   if (type) pinFields.type = type;
 
   try {
-    let contact = await Contact.findById(req.params.id);
+    let pin = await Pin.findById(req.params.id);
 
-    if (!contact) return res.status(404).json({ msg: 'Contact not found.' });
+    if (!pin) return res.status(404).json({ msg: 'Pin not found.' });
 
     // Make sure user owns contact
-    if (contact.user.toString() !== req.user.id) {
+    if (pin.user.toString() !== req.user.id) {
       return res.status(401).json({ msg: 'Not Authorized' });
     }
 
-    contact = await Contact.findByIdAndUpdate(
+    pin = await Pin.findByIdAndUpdate(
       req.params.id,
-      { $set: contactFields },
+      { $set: pinFields },
       { new: true }
     );
-    res.json(contact);
+    res.json(pin);
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');
@@ -112,18 +113,18 @@ router.put('/:id', auth, async (req, res) => {
 // @access  Private
 router.delete('/:id', auth, async (req, res) => {
   try {
-    let contact = await Contact.findById(req.params.id);
+    let pin = await Pin.findById(req.params.id);
 
-    if (!contact) return res.status(404).json({ msg: 'Contact not found.' });
+    if (!pin) return res.status(404).json({ msg: 'Pin not found.' });
 
     // Make sure user owns contact
-    if (contact.user.toString() !== req.user.id) {
+    if (pin.user.toString() !== req.user.id) {
       return res.status(401).json({ msg: 'Not Authorized' });
     }
 
-    await Contact.findByIdAndRemove(req.params.id);
+    await Pin.findByIdAndRemove(req.params.id);
 
-    res.json({ msg: 'Contact removed.' });
+    res.json({ msg: 'Pin removed.' });
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');
