@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
+  "proxy": "http://localhost:5000",
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run prod || npm run dev",
     "prod": "node server.js",

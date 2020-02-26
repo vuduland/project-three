@@ -9,6 +9,7 @@ Navbar */
   border-bottom: solid 1px var(--primary-color);
   opacity: 0.9;
   margin-bottom: 1rem;
+  position: fixed;
 }
 
 .navbar ul {
@@ -16,7 +17,6 @@ Navbar */
 }
 
 .navbar a {
-  color: #fff;
   padding: 0.45rem;
   margin: 0 0.25rem;
 }

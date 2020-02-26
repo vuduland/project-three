@@ -7,9 +7,18 @@ import About from './components/pages/About';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 
+
+import AuthState from './context/auth/AuthState';
+import ContactState from './context/contact/ContactState';
+import AlertState from './context/alert/AlertState';
+import './App.css';
+
 const App = () => {
 
     return (
+          <AuthState>
+      <ContactState>
+        <AlertState>
         <Router>
           <Fragment>
             <Nav /> {/* Navbar */}
@@ -25,6 +34,9 @@ const App = () => {
             <GoogleApiWrapper />
           </Fragment>
         </Router>
+                </AlertState>
+      </ContactState>
+    </AuthState>
     );
   };
 
