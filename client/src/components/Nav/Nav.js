@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const Nav = ({ title, icon }) => {
   return (
-    <div className='navbar bg-primary'>
+    <div className='navbar bg-primary sticky-top'>
       <h1>
         <i className={icon} /> {title}
       </h1>

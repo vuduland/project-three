@@ -1,27 +1,36 @@
 import {
   REGISTER_SUCCESS,
-  REGISTER_FAIL
-  // USER_LOADED,
-  // AUTH_ERROR,
-  // LOGIN_SUCCESS,
-  // LOGIN_FAIL,
-  // LOGOUT,
-  // CLEAR_ERRORS
+  REGISTER_FAIL,
+  USER_LOADED,
+  AUTH_ERROR,
+  LOGIN_SUCCESS,
+  LOGIN_FAIL,
+  LOGOUT,
+  CLEAR_ERRORS
 } from '../types';
 
 export default (state, action) => {
   switch (action.type) {
-    case REGISTER_SUCCESS:
-      //token that we get back inside of localstorage; it is from action.payload.token
-      localStorage.setitem('token', action.payload.token);
+    case USER_LOADED:
       return {
-        ...state, // passing action down to the component
-        ...action.payload, // token
+        ...state,
+        isAuthenticated: true,
+        loading: false,
+        user: action.payload
+      };
+    case REGISTER_SUCCESS:
+    case LOGIN_SUCCESS:
+      localStorage.setItem('token', action.payload.token);
+      return {
+        ...state,
+        ...action.payload,
         isAuthenticated: true,
         loading: false
       };
     case REGISTER_FAIL:
-      // remove token from storage on failed registration
+    case AUTH_ERROR:
+    case LOGIN_FAIL:
+    case LOGOUT:
       localStorage.removeItem('token');
       return {
         ...state,
@@ -29,7 +38,12 @@ export default (state, action) => {
         isAuthenticated: false,
         loading: false,
         user: null,
-        error: action.payload // from AuthState dispatch({ payload: err.response.data.msg})
+        error: action.payload
+      };
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null
       };
     default:
       return state;

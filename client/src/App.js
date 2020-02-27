@@ -7,7 +7,8 @@ import About from './components/pages/About';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 
-
+import AuthContext from './context/auth/authContext'
+import setAuthToken from './utils/setAuthToken';
 import AuthState from './context/auth/AuthState';
 import ContactState from './context/contact/ContactState';
 import AlertState from './context/alert/AlertState';
@@ -15,8 +16,8 @@ import './App.css';
 
 const App = () => {
 
-    return (
-          <AuthState>
+  return (
+    <AuthState>
       <ContactState>
         <AlertState>
         <Router>
@@ -34,7 +35,7 @@ const App = () => {
             <GoogleApiWrapper />
           </Fragment>
         </Router>
-                </AlertState>
+        </AlertState>
       </ContactState>
     </AuthState>
     );

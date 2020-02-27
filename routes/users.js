@@ -20,16 +20,16 @@ DELETE: delete something from the server
 // @access  Public
 router.post(
   '/',
-  [
-    check('name', 'Please add name.')
-      .not()
-      .isEmpty(),
-    check('email', 'Please include a valid email').isEmail(),
-    check(
-      'password',
-      'Please enter a password with six or more characters'
-    ).isLength({ min: 6 })
-  ],
+  // [
+  //   check('name', 'Please add name.')
+  //     .not()
+  //     .isEmpty(),
+  //   check('email', 'Please include a valid email').isEmail(),
+  //   check(
+  //     'password',
+  //     'Please enter a password with six or more characters'
+  //   ).isLength({ min: 6 })
+  // ],
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -57,23 +57,27 @@ router.post(
 
       await user.save();
 
+      res.send('User saved') // This sends fine in Postman but user is not saving to our database as far as I can tell -PS
+
       const payload = {
         user: {
           id: user.id
         }
       };
+      console.log(payload);
 
       jwt.sign(
         payload,
         config.get('jwtSecret'),
         {
-          expiresIn: 360000
+          expiresIn: 36000
         },
         (err, token) => {
           if (err) throw err;
           res.json({ token });
         }
       );
+      console.log({token});
 
       // res.send('User saved');
     } catch (err) {

@@ -21,7 +21,7 @@ router.get('/', auth, async (req, res) => {
   }
 });
 
-// @route   POST api/auth --> same URL as above: ok because we are using different HTTP methods
+// @route   POST api/auth
 // @desc    Auth user and get token
 // @access  Public
 router.post(
