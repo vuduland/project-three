@@ -1,9 +1,0 @@
-# dependencies
-
-/node_modules
-untitled.js
-**/node_modules
-# misc
-.DS_Store
-.env
-
