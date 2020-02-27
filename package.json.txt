@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
-  "proxy": "http://localhost:5000",
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run prod || npm run dev",
     "prod": "node server.js",
@@ -14,7 +13,7 @@
     "install": "cd client && npm install",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
-  "author": "Delia Bouhan, Jay Smith, Peter Smith, & Victor Uland",
+  "author": "",
   "keywords": [],
   "license": "ISC",
   "dependencies": {
@@ -28,8 +27,7 @@
     "jsonwebtoken": "^8.5.1",
     "materialize-css": "^1.0.0-rc.2",
     "mongoose": "^5.7.5",
-    "npm": "^6.14.0",
-    "react-materialize": "3.5.9"
+    "react-router-dom": "^5.1.2"
   },
   "devDependencies": {
     "concurrently": "^4.1.0",

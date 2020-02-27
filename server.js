@@ -1,45 +1,31 @@
-const express = require('express');
-require('dotenv').config();
+const express = require('express'); // must use this which, syntax is CommonJS, unless using typescript or babel
+const connectDB = require('./config/db');
 const path = require('path');
-const PORT = process.env.PORT || 8080;
-const MongoClient = require('mongodb').MongoClient;
 const app = express();
 
-const uri = process.env.MONGODB_URI;
+const PORT = process.env.PORT || 5000;
 
-const client = new MongoClient(uri, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-});
-client.connect(err => {
-  if (err) {
-    console.log(err);
-  } else {
-    const collection = client.db('kc-cleanup').collection('Users');
-    //     collection.insertOne({
-    //       item: 'canvas',
-    //       qty: 100,
-    //       tags: ['cotton'],
-    //       size: { h: 28, w: 35.5, uom: 'cm' }
-    //     });
-    console.log(`referencing ${collection} in the database. connected. hi.`);
-  }
-});
+// Connect Database
+connectDB();
 
-// Serve up static assets (usually on heroku)
+// Init Middleware
+app.use(express.json({ extended: false }));
+
+// Define Routes
+//anything that goes to '/api/...' gets forwarded to './routes/...'
+app.use('/api/users', require('./routes/users'));
+app.use('/api/auth', require('./routes/auth'));
+app.use('/api/pins', require('./routes/pins'));
+
+// Serve static assets in production.
 if (process.env.NODE_ENV === 'production') {
+  // Set static folder
   app.use(express.static('client/build'));
+  app.get('*', (req, res) =>
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+  );
 }
 
-// Send every request to the React app
-// Define any API routes before this runs
-app.get('*', function(req, res) {
-  res.sendFile(path.join(__dirname, './client/build/index.html'));
-  if (res) {
-    console.log('CONNECTED TO NETWORK MAYBE');
-  }
-});
+const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, function() {
-  console.log(`🌎 ==> API server now on port ${PORT}!`);
-});
+app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
