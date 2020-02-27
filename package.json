@@ -5,8 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
-    "start:prod": "node server.js",
-    "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
+    "server": "nodemon server.js",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
     "client": "cd client && npm run start",
     "seed": "node scripts/seedDB.js",
     "install": "cd client && npm install",
@@ -16,13 +16,15 @@
   "author": "Delia Bouhan, Jay Smith, Peter Smith, & Victor Uland",
   "license": "ISC",
   "devDependencies": {
-    "concurrently": "^4.1.0",
-    "nodemon": "^2.0.1-alpha.3"
+    "concurrently": "^4.1.2",
+    "nodemon": "^2.0.2"
   },
   "dependencies": {
     "braces": ">=2.3.1",
     "dotenv": "^8.2.0",
     "express": "^4.16.3",
+    "express-fileupload": "^1.1.6",
+    "firebase": "^7.9.1",
     "google-maps-react": "^2.0.2",
     "if-env": "^1.0.4",
     "materialize-css": "^1.0.0-rc.2",
