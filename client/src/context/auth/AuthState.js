@@ -1,3 +1,5 @@
+/** @format */
+
 // the state files are where "actions" come from
 import React, { useReducer } from 'react'; // to have access to state and also dispatch, to dispatch to our reducer
 import axios from 'axios';
@@ -12,7 +14,7 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT,
-  CLEAR_ERRORS
+  CLEAR_ERRORS,
 } from '../types';
 
 const AuthState = props => {
@@ -21,7 +23,7 @@ const AuthState = props => {
     isAuthenticated: null,
     loading: true,
     user: null,
-    error: null
+    error: null,
   };
 
   const [state, dispatch] = useReducer(authReducer, initialState); // state allows access to anything in our state; dispatch allows us to dispatch objects to the reducer
@@ -34,7 +36,7 @@ const AuthState = props => {
 
       dispatch({
         type: USER_LOADED,
-        payload: res.data
+        payload: res.data,
       });
     } catch (err) {
       dispatch({ type: AUTH_ERROR });
@@ -54,14 +56,14 @@ const AuthState = props => {
 
       dispatch({
         type: REGISTER_SUCCESS,
-        payload: res.data
+        payload: res.data,
       });
 
       loadUser();
     } catch (err) {
       dispatch({
         type: REGISTER_FAIL,
-        payload: err.response.data.msg
+        payload: err.response.data.msg,
       });
     }
   };
@@ -79,15 +81,19 @@ const AuthState = props => {
 
       dispatch({
         type: LOGIN_SUCCESS,
-        payload: res.data
+        payload: res.data,
       });
+      console.log(
+        `${res.data} === res.data \n  ${LOGIN_SUCCESS} === LOGIN_SUCCESS \n ${res} === res`
+      );
 
       loadUser();
     } catch (err) {
       dispatch({
         type: LOGIN_FAIL,
-        payload: err.response.data.msg
+        payload: err.response.data.msg,
       });
+      // console.log(err.response.data.msg + '\n err.response.data.msg');
     }
   };
 
@@ -109,9 +115,8 @@ const AuthState = props => {
         loadUser,
         login,
         logout,
-        clearErrors
-      }}
-    >
+        clearErrors,
+      }}>
       {props.children}
     </AuthContext.Provider>
   );
