@@ -19,35 +19,6 @@ import {
 } from '../types';
 
 const ContactState = props => {
-  // const initialState = {
-  //   contacts: [
-  //     // can access in Contacts component
-  //     {
-  //       id: 1,
-  //       name: 'Jill Johnson',
-  //       email: 'jill@gmail.com',
-  //       phone: '111-111-1111',
-  //       type: 'personal',
-  //     },
-  //     {
-  //       id: 2,
-  //       name: 'Rico Quintanilla',
-  //       email: 'jaycoquin@gmail.com',
-  //       phone: '111-111-2222',
-  //       type: 'personal',
-  //     },
-  //     {
-  //       id: 3,
-  //       name: 'Delia Bouhan',
-  //       email: 'did.good.work@gmail.com',
-  //       phone: '111-111-3333',
-  //       type: 'professional',
-  //     },
-  //   ],
-  //   current: null,
-  //   filtered: null, // will be an array of filtered contacts that match the input
-  // };
-
   const initialState = {
     contacts: null,
     current: null,
@@ -76,39 +47,95 @@ const ContactState = props => {
   };
 
   // Add Contact
-  const addContact = contact => {
-    contact.id = uuid.v4();
-    dispatch({ type: ADD_CONTACT, payload: contact }); // dispatch to our reducer
+  const addContact = async contact => {
+    // const config = {
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    // };
+
+    try {
+      const res = await axios.post('/api/contacts', contact);
+
+      // dispatch to our reducer
+      dispatch({
+        type: ADD_CONTACT,
+        payload: res.data,
+      });
+    } catch (err) {
+      dispatch({
+        type: CONTACT_ERROR,
+        payload: err.response.msg,
+      });
+    }
   };
 
-  // Delete Contact
-  const deleteContact = id => {
-    dispatch({ type: DELETE_CONTACT, payload: id }); // dispatch to our reducer
+  const deleteContact = async id => {
+    try {
+      await axios.delete(`/api/contacts/${id}`);
+
+      dispatch({
+        type: DELETE_CONTACT,
+        payload: id,
+      });
+    } catch (err) {
+      dispatch({
+        type: CONTACT_ERROR,
+        payload: err.response.msg,
+      });
+    }
+  };
+
+  // Update Contact
+  const updateContact = async contact => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+
+    try {
+      const res = await axios.put(
+        `/api/contacts/${contact._id}`,
+        contact,
+        config
+      );
+
+      dispatch({
+        type: UPDATE_CONTACT,
+        payload: res.data,
+      });
+    } catch (err) {
+      dispatch({
+        type: CONTACT_ERROR,
+        payload: err.response.msg,
+      });
+    }
+  };
+
+  // Clear Contacts
+  const clearContacts = () => {
+    dispatch({ type: CLEAR_CONTACTS });
   };
 
   // Set Current Contact
   const setCurrent = contact => {
-    dispatch({ type: SET_CURRENT, payload: contact }); // dispatch to our reducer
+    dispatch({ type: SET_CURRENT, payload: contact });
   };
 
   // Clear Current Contact
   const clearCurrent = () => {
-    dispatch({ type: CLEAR_CURRENT }); // dispatch to our reducer
-  };
-
-  // Update Contact
-  const updateContact = contact => {
-    dispatch({ type: UPDATE_CONTACT, payload: contact }); // dispatch to our reducer
+    dispatch({ type: CLEAR_CURRENT });
   };
 
   // Filter Contacts
   const filterContacts = text => {
-    dispatch({ type: FILTER_CONTACTS, payload: text }); // dispatch to our reducer
+    dispatch({ type: FILTER_CONTACTS, payload: text });
   };
 
   // Clear Filter
   const clearFilter = () => {
-    dispatch({ type: CLEAR_FILTER }); // dispatch to our reducer
+    dispatch({ type: CLEAR_FILTER });
   };
 
   return (
@@ -117,13 +144,17 @@ const ContactState = props => {
         contacts: state.contacts,
         current: state.current,
         filtered: state.filtered,
-        addContact, // whenever we need to access anything from a component through our context we need to add/call it here. if we reload it's just added to memory, not DB
+        error: state.error,
+        // whenever we need to access anything from a component through our context we need to add/call it here. if we reload it's just added to memory, not DB
+        addContact,
         deleteContact,
         setCurrent,
         clearCurrent,
         updateContact,
         filterContacts,
         clearFilter,
+        getContacts,
+        clearContacts,
       }}>
       {props.children}
     </ContactContext.Provider>

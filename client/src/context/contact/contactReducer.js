@@ -9,7 +9,7 @@ import {
   UPDATE_CONTACT,
   FILTER_CONTACTS,
   CLEAR_FILTER,
-  // CONTACT_ERROR,
+  CONTACT_ERROR,
   // CLEAR_CONTACTS
 } from '../types';
 
@@ -32,6 +32,11 @@ export default (state, action) => {
         contacts: state.contacts.filter(
           contact => contact.id !== action.payload
         ), // state.contacts === current contacts array; filer(...) is all contacts that are not in this id; action.payload is sent in the ContactItem component
+      };
+    case CONTACT_ERROR:
+      return {
+        ...state,
+        error: action.payload,
       };
     case SET_CURRENT:
       return {

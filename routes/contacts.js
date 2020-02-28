@@ -1,3 +1,5 @@
+/** @format */
+
 // CRUD ROUTE
 const express = require('express');
 const router = express.Router();
@@ -13,7 +15,7 @@ const Contact = require('../models/Contact');
 router.get('/', auth, async (req, res) => {
   try {
     const contacts = await Contact.find({ user: req.user.id }).sort({
-      date: -1
+      date: -1,
     });
     res.json(contacts);
   } catch (err) {
@@ -32,8 +34,8 @@ router.post(
     [
       check('name', 'Name is required')
         .not()
-        .isEmpty()
-    ]
+        .isEmpty(),
+    ],
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -49,11 +51,12 @@ router.post(
         email,
         phone,
         type,
-        user: req.user.id
+        user: req.user.id,
       });
 
       const contact = await newContact.save();
-
+      res.send(contact);
+      console.log(contact);
       res.json(contact);
     } catch (err) {
       console.error(err.message);
