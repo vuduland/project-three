@@ -15,7 +15,7 @@ import {
   FILTER_CONTACTS,
   CLEAR_CONTACTS,
   CLEAR_FILTER,
-  CONTACT_ERROR,
+  CONTACT_ERROR
 } from '../types';
 
 const ContactState = props => {
@@ -23,7 +23,7 @@ const ContactState = props => {
     contacts: null,
     current: null,
     filtered: null, // will be an array of filtered contacts that match the input
-    error: null,
+    error: null
   };
 
   // state allows access to anything in our state; dispatch allows us to dispatch objects to the reducer
@@ -36,36 +36,30 @@ const ContactState = props => {
 
       dispatch({
         type: GET_CONTACTS,
-        payload: res.data,
+        payload: res.data
       });
     } catch (err) {
       dispatch({
         type: CONTACT_ERROR,
-        payload: err.response.msg,
+        payload: err.response.msg
       });
     }
   };
 
   // Add Contact
   const addContact = async contact => {
-    // const config = {
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    // };
-
     try {
       const res = await axios.post('/api/contacts', contact);
 
       // dispatch to our reducer
       dispatch({
         type: ADD_CONTACT,
-        payload: res.data,
+        payload: res.data
       });
     } catch (err) {
       dispatch({
         type: CONTACT_ERROR,
-        payload: err.response.msg,
+        payload: err.response.msg
       });
     }
   };
@@ -76,12 +70,12 @@ const ContactState = props => {
 
       dispatch({
         type: DELETE_CONTACT,
-        payload: id,
+        payload: id
       });
     } catch (err) {
       dispatch({
         type: CONTACT_ERROR,
-        payload: err.response.msg,
+        payload: err.response.msg
       });
     }
   };
@@ -90,8 +84,8 @@ const ContactState = props => {
   const updateContact = async contact => {
     const config = {
       headers: {
-        'Content-Type': 'application/json',
-      },
+        'Content-Type': 'application/json'
+      }
     };
 
     try {
@@ -103,12 +97,12 @@ const ContactState = props => {
 
       dispatch({
         type: UPDATE_CONTACT,
-        payload: res.data,
+        payload: res.data
       });
     } catch (err) {
       dispatch({
         type: CONTACT_ERROR,
-        payload: err.response.msg,
+        payload: err.response.msg
       });
     }
   };
@@ -154,8 +148,9 @@ const ContactState = props => {
         filterContacts,
         clearFilter,
         getContacts,
-        clearContacts,
-      }}>
+        clearContacts
+      }}
+    >
       {props.children}
     </ContactContext.Provider>
   );
