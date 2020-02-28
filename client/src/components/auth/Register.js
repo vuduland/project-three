@@ -1,4 +1,6 @@
-import React, { useState, useContext } from 'react';
+/** @format */
+
+import React, { useState, useContext, useEffect } from 'react'; // imported useEffect here VAU
 import AlertContext from '../../context/alert/alertContext';
 import AuthContext from '../../context/auth/authContext';
 
@@ -9,23 +11,24 @@ const Register = props => {
   const { setAlert } = alertContext;
   const { register, error, clearErrors, isAuthenticated } = authContext;
 
-  // useEffect(() => {
-  //   if (isAuthenticated) {
-  //     props.history.push('/');
-  //   }
+  useEffect(() => {
+    // uncommented this VAU
+    if (isAuthenticated) {
+      props.history.push('/');
+    }
 
-  //   if (error === 'User already exists') {
-  //     setAlert(error, 'danger');
-  //     clearErrors();
-  //   }
-  //   // eslint-disable-next-line
-  // }, [error, isAuthenticated, props.history]);
+    if (error === 'User already exists') {
+      setAlert(error, 'danger');
+      clearErrors();
+    }
+    // eslint-disable-next-line
+  }, [error, isAuthenticated, props.history]);
 
   const [user, setUser] = useState({
     name: '',
     email: '',
     password: '',
-    password2: ''
+    password2: '',
   });
 
   const { name, email, password, password2 } = user;
@@ -43,7 +46,7 @@ const Register = props => {
         // in order to use this we add the value to AuthState as {props.children }
         name,
         email,
-        password
+        password,
       });
     }
   };

@@ -21,7 +21,6 @@ DELETE: delete something from the server
 // @desc    Register a user
 // @access  Public
 router.post(
-  // uncommented checks array VAU
   '/',
   [
     check('name', 'Please add name.')
@@ -60,28 +59,23 @@ router.post(
 
       await user.save();
 
-      res.send('User saved'); // This sends fine in Postman but user is not saving to our database as far as I can tell -PS
-
       const payload = {
         user: {
           id: user.id,
         },
       };
-      console.log(payload);
 
       jwt.sign(
         payload,
         config.get('jwtSecret'),
         {
-          expiresIn: 36000,
+          expiresIn: 360000,
         },
         (err, token) => {
-          // if (err) throw err;
-          console.log(err + '\n' + token);
+          if (err) throw err;
           res.json({ token });
         }
       );
-      console.log({ token });
 
       // res.send('User saved');
     } catch (err) {
