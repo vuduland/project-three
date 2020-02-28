@@ -17,7 +17,7 @@ const ContactForm = () => {
         name: '',
         email: '',
         phone: '',
-        type: 'personal',
+        type: 'personal'
       });
     }
   }, [contactContext, current]); // only calls useEffect if contactContext or current value is changed; also will get warning if brackets are empty
@@ -27,7 +27,7 @@ const ContactForm = () => {
     name: '',
     email: '',
     phone: '',
-    type: 'personal',
+    type: 'personal'
   });
 
   const { name, email, phone, type } = contact; // Whenever we change an input in the form, the value of these extracted variables
@@ -44,13 +44,6 @@ const ContactForm = () => {
       updateContact(contact);
     }
     clearAll();
-    // addContact(contact);
-    // setContact({
-    //   name: '',
-    //   email: '',
-    //   phone: '',
-    //   type: 'personal'
-    // });
   };
 
   const clearAll = () => {

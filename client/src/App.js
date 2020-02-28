@@ -1,3 +1,5 @@
+/** @format */
+
 import React, { Fragment } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import GoogleApiWrapper from './components/DisplayMap/DisplayMap';
@@ -7,22 +9,19 @@ import About from './components/pages/About';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 
-import AuthContext from './context/auth/authContext'
-import setAuthToken from './utils/setAuthToken';
 import AuthState from './context/auth/AuthState';
 import ContactState from './context/contact/ContactState';
 import AlertState from './context/alert/AlertState';
 import './App.css';
 
 const App = () => {
-
   return (
     <AuthState>
       <ContactState>
         <AlertState>
-        <Router>
-          <Fragment>
-            <Nav /> {/* Navbar */}
+          <Router>
+            <Fragment>
+              <Nav /> {/* Navbar */}
               {/* div with switch case and links */}
               <div className='container'>
                 <Switch>
@@ -32,13 +31,13 @@ const App = () => {
                   <Route exact path='/login' component={Login} />
                 </Switch>
               </div>
-            <GoogleApiWrapper />
-          </Fragment>
-        </Router>
+              <GoogleApiWrapper />
+            </Fragment>
+          </Router>
         </AlertState>
       </ContactState>
     </AuthState>
-    );
-  };
+  );
+};
 
 export default App;
