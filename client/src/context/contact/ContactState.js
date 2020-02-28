@@ -2,7 +2,7 @@
 
 import React, { useReducer } from 'react'; // to have access to state and also dispatch, to dispatch to our reducer
 import axios from 'axios';
-// import uuid from 'uuid'; // to work with hard coded dummy data, foorrrrrr nowwwwww
+import uuid from 'uuid'; // to work with hard coded dummy data, foorrrrrr nowwwwww
 import ContactContext from './contactContext';
 import contactReducer from './contactReducer';
 import {
@@ -19,41 +19,41 @@ import {
 } from '../types';
 
 const ContactState = props => {
-  // const initialState = {
-  //   contacts: [
-  //     // can access in Contacts component
-  //     {
-  //       id: 1,
-  //       name: 'Jill Johnson',
-  //       email: 'jill@gmail.com',
-  //       phone: '111-111-1111',
-  //       type: 'personal',
-  //     },
-  //     {
-  //       id: 2,
-  //       name: 'Rico Quintanilla',
-  //       email: 'jaycoquin@gmail.com',
-  //       phone: '111-111-2222',
-  //       type: 'personal',
-  //     },
-  //     {
-  //       id: 3,
-  //       name: 'Delia Bouhan',
-  //       email: 'did.good.work@gmail.com',
-  //       phone: '111-111-3333',
-  //       type: 'professional',
-  //     },
-  //   ],
-  //   current: null,
-  //   filtered: null, // will be an array of filtered contacts that match the input
-  // };
-
   const initialState = {
-    contacts: null,
+    contacts: [
+      // can access in Contacts component
+      {
+        id: 1,
+        name: 'Jill Johnson',
+        email: 'jill@gmail.com',
+        phone: '111-111-1111',
+        type: 'personal',
+      },
+      {
+        id: 2,
+        name: 'Rico Quintanilla',
+        email: 'jaycoquin@gmail.com',
+        phone: '111-111-2222',
+        type: 'personal',
+      },
+      {
+        id: 3,
+        name: 'Delia Bouhan',
+        email: 'did.good.work@gmail.com',
+        phone: '111-111-3333',
+        type: 'professional',
+      },
+    ],
     current: null,
     filtered: null, // will be an array of filtered contacts that match the input
-    error: null,
   };
+
+  // const initialState = {
+  //   contacts: null,
+  //   current: null,
+  //   filtered: null, // will be an array of filtered contacts that match the input
+  //   error: null,
+  // };
 
   // state allows access to anything in our state; dispatch allows us to dispatch objects to the reducer
   const [state, dispatch] = useReducer(contactReducer, initialState);
