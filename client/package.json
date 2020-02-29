@@ -2,11 +2,13 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:5000",
   "dependencies": {
     "axios": "^0.18.1",
     "classnames": "^2.2.6",
+    "express": "^4.17.1",
     "google-maps-react": "2.0.2",
+    "materialize-css": "^1.0.0-rc.2",
+    "materialize-js": "1.0.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-materialize": "3.5.9",
@@ -35,5 +37,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "proxy": "http://localhost:5000"
 }

@@ -1,8 +1,5 @@
-/** @format */
-
-import React, { useReducer } from 'react'; // to have access to state and also dispatch, to dispatch to our reducer
+import React, { useReducer } from 'react';
 import axios from 'axios';
-// import uuid from 'uuid'; // to work with hard coded dummy data, foorrrrrr nowwwwww
 import ContactContext from './contactContext';
 import contactReducer from './contactReducer';
 import {
@@ -22,11 +19,10 @@ const ContactState = props => {
   const initialState = {
     contacts: null,
     current: null,
-    filtered: null, // will be an array of filtered contacts that match the input
+    filtered: null,
     error: null
   };
 
-  // state allows access to anything in our state; dispatch allows us to dispatch objects to the reducer
   const [state, dispatch] = useReducer(contactReducer, initialState);
 
   // Get Contacts
@@ -48,10 +44,15 @@ const ContactState = props => {
 
   // Add Contact
   const addContact = async contact => {
-    try {
-      const res = await axios.post('/api/contacts', contact);
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
 
-      // dispatch to our reducer
+    try {
+      const res = await axios.post('/api/contacts', contact, config);
+
       dispatch({
         type: ADD_CONTACT,
         payload: res.data
@@ -64,6 +65,7 @@ const ContactState = props => {
     }
   };
 
+  // Delete Contact
   const deleteContact = async id => {
     try {
       await axios.delete(`/api/contacts/${id}`);
@@ -139,7 +141,6 @@ const ContactState = props => {
         current: state.current,
         filtered: state.filtered,
         error: state.error,
-        // whenever we need to access anything from a component through our context we need to add/call it here. if we reload it's just added to memory, not DB
         addContact,
         deleteContact,
         setCurrent,

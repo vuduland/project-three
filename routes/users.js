@@ -1,5 +1,3 @@
-/** @format */
-
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
@@ -9,29 +7,20 @@ const { check, validationResult } = require('express-validator/check');
 
 const User = require('../models/User');
 
-// HTTP methods:
-/*
-GET: fetch data from the server
-POST: submitting something to the server, filling out form, or adding contact, etc.
-PUT: update something that's already on the server
-DELETE: delete something from the server
-*/
-
-// @route   POST api/users
-// @desc    Register a user
-// @access  Public
+// @route     POST api/users
+// @desc      Regiter a user
+// @access    Public
 router.post(
-  // uncommented checks array VAU
   '/',
   [
-    check('name', 'Please add name.')
+    check('name', 'Please add name')
       .not()
       .isEmpty(),
     check('email', 'Please include a valid email').isEmail(),
     check(
       'password',
-      'Please enter a password with six or more characters'
-    ).isLength({ min: 6 }),
+      'Please enter a password with 6 or more characters'
+    ).isLength({ min: 6 })
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -51,7 +40,7 @@ router.post(
       user = new User({
         name,
         email,
-        password,
+        password
       });
 
       const salt = await bcrypt.genSalt(10);
@@ -60,33 +49,26 @@ router.post(
 
       await user.save();
 
-      res.send('User saved'); // This sends fine in Postman but user is not saving to our database as far as I can tell -PS
-
       const payload = {
         user: {
-          id: user.id,
-        },
+          id: user.id
+        }
       };
-      console.log(payload);
 
       jwt.sign(
         payload,
         config.get('jwtSecret'),
         {
-          expiresIn: 36000,
+          expiresIn: 360000
         },
         (err, token) => {
-          // if (err) throw err;
-          console.log(err + '\n' + token);
+          if (err) throw err;
           res.json({ token });
         }
       );
-      console.log({ token });
-
-      // res.send('User saved');
     } catch (err) {
       console.error(err.message);
-      res.status(500).send('Server error'); // we get a very generic Server error here; try to find a specific error code after vids
+      res.status(500).send('Server Error');
     }
   }
 );

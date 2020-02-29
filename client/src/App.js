@@ -3,7 +3,7 @@
 import React, { Fragment } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import GoogleApiWrapper from './components/DisplayMap/DisplayMap';
-import Nav from './components/Nav/Nav';
+import Nav from './components/nav/Nav';
 import Home from './components/pages/Home';
 import About from './components/pages/About';
 import Register from './components/auth/Register';

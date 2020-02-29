@@ -1,3 +1,5 @@
+/** @format */
+
 import React, { useState, useContext, useEffect } from 'react';
 import AuthContext from '../../context/auth/authContext';
 import AlertContext from '../../context/alert/alertContext';
@@ -12,6 +14,7 @@ const Login = props => {
   useEffect(() => {
     if (isAuthenticated) {
       props.history.push('/');
+      console.log(isAuthenticated + '\n Hit useEffect route, logged in'); // added console.log here
     }
 
     if (error === 'Invalid Credentials') {
@@ -23,7 +26,7 @@ const Login = props => {
 
   const [user, setUser] = useState({
     email: '',
-    password: ''
+    password: '',
   });
 
   const { email, password } = user;
@@ -37,7 +40,7 @@ const Login = props => {
     } else {
       login({
         email,
-        password
+        password,
       });
     }
   };
@@ -45,7 +48,7 @@ const Login = props => {
   return (
     <div className='form-container'>
       <h1>
-        Account <span className='text-primary'>Login</span>
+        <span className='text-primary'>Login</span>
       </h1>
       <form onSubmit={onSubmit}>
         <div className='form-group'>

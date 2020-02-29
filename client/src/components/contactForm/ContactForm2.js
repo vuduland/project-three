@@ -1,8 +1,10 @@
-import React, { useState, useContext, useEffect } from 'react';
+/** @format */
+// CRUD WORKS FOR CONTACTS
+import React, { useState, useContext, useEffect } from 'react'; // useContext is a hook; probably useState as well
 import ContactContext from '../../context/contact/contactContext';
 
 const ContactForm = () => {
-  const contactContext = useContext(ContactContext);
+  const contactContext = useContext(ContactContext); // this should give access to any methods or state
 
   const { addContact, updateContact, clearCurrent, current } = contactContext;
 
@@ -11,28 +13,31 @@ const ContactForm = () => {
       setContact(current);
     } else {
       setContact({
+        // set it to default state
         name: '',
         email: '',
         phone: '',
         type: 'personal'
       });
     }
-  }, [contactContext, current]);
+  }, [contactContext, current]); // only calls useEffect if contactContext or current value is changed; also will get warning if brackets are empty
 
   const [contact, setContact] = useState({
+    // this is all the state of the form
     name: '',
     email: '',
     phone: '',
     type: 'personal'
   });
 
-  const { name, email, phone, type } = contact;
+  const { name, email, phone, type } = contact; // Whenever we change an input in the form, the value of these extracted variables
 
   const onChange = e =>
     setContact({ ...contact, [e.target.name]: e.target.value });
 
   const onSubmit = e => {
     e.preventDefault();
+
     if (current === null) {
       addContact(contact);
     } else {
@@ -52,7 +57,7 @@ const ContactForm = () => {
       </h2>
       <input
         type='text'
-        placeholder='Name'
+        placeholder='name'
         name='name'
         value={name}
         onChange={onChange}
@@ -77,7 +82,7 @@ const ContactForm = () => {
         name='type'
         value='personal'
         checked={type === 'personal'}
-        onChange={onChange}
+        onChange={onChange} // because these are controlled components (defaulted to personal?) we have to add onChange event
       />{' '}
       Personal{' '}
       <input
@@ -87,7 +92,7 @@ const ContactForm = () => {
         checked={type === 'professional'}
         onChange={onChange}
       />{' '}
-      Professional
+      Professional{' '}
       <div>
         <input
           type='submit'

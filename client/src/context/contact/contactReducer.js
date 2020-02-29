@@ -1,5 +1,3 @@
-/** @format */
-
 import {
   GET_CONTACTS,
   ADD_CONTACT,
@@ -23,9 +21,9 @@ export default (state, action) => {
       };
     case ADD_CONTACT:
       return {
-        ...state, // current state
+        ...state,
         contacts: [action.payload, ...state.contacts],
-        loading: false // state is immutable but the spread operator allows us to update our state
+        loading: false
       };
     case UPDATE_CONTACT:
       return {
@@ -37,10 +35,10 @@ export default (state, action) => {
       };
     case DELETE_CONTACT:
       return {
-        ...state, // current state
+        ...state,
         contacts: state.contacts.filter(
           contact => contact._id !== action.payload
-        ), // state.contacts === current contacts array; filer(...) is all contacts that are not in this id; action.payload is sent in the ContactItem component
+        ),
         loading: false
       };
     case CLEAR_CONTACTS:
@@ -51,7 +49,6 @@ export default (state, action) => {
         error: null,
         current: null
       };
-
     case SET_CURRENT:
       return {
         ...state,
@@ -62,14 +59,13 @@ export default (state, action) => {
         ...state,
         current: null
       };
-
     case FILTER_CONTACTS:
       return {
         ...state,
         filtered: state.contacts.filter(contact => {
-          const regex = new RegExp(`${action.payload}`, 'gi'); // regex === Regular expression; gi === global insensitive (case)
+          const regex = new RegExp(`${action.payload}`, 'gi');
           return contact.name.match(regex) || contact.email.match(regex);
-        }) // High order array method, like map and match
+        })
       };
     case CLEAR_FILTER:
       return {
