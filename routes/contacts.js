@@ -1,3 +1,5 @@
+/** @format */
+
 // CRUD ROUTE
 const express = require('express');
 const router = express.Router();
@@ -5,25 +7,25 @@ const auth = require('../middleware/auth');
 const { check, validationResult } = require('express-validator/check');
 
 const User = require('../models/User');
-const Contact = require('../models/Contact');
+const Pin = require('../models/Pin');
 
-// @route   GET api/contacts
-// @desc    Get all user's contacts
+// @route   GET api/pins
+// @desc    Get all user's pins
 // @access  Private
 router.get('/', auth, async (req, res) => {
   try {
-    const contacts = await Contact.find({ user: req.user.id }).sort({
-      date: -1
+    const pins = await Pin.find({ user: req.user.id }).sort({
+      date: -1,
     });
-    res.json(contacts);
+    res.json(pins);
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');
   }
 });
 
-// @route   POST api/contacts
-// @desc    Add new contact
+// @route   POST api/pins
+// @desc    Add new pin
 // @access  Private
 router.post(
   '/',
@@ -32,8 +34,8 @@ router.post(
     [
       check('name', 'Name is required')
         .not()
-        .isEmpty()
-    ]
+        .isEmpty(),
+    ],
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -44,17 +46,17 @@ router.post(
     const { name, email, phone, type } = req.body;
 
     try {
-      const newContact = new Contact({
+      const newPin = new Pin({
         name,
         email,
         phone,
         type,
-        user: req.user.id
+        user: req.user.id,
       });
 
-      const contact = await newContact.save();
+      const pin = await newPin.save();
 
-      res.json(contact);
+      res.json(pin);
     } catch (err) {
       console.error(err.message);
       res.status(500).send('Server Error');
@@ -62,58 +64,58 @@ router.post(
   }
 );
 
-// @route   PUT api/contacts:id
-// @desc    Update contact
+// @route   PUT api/pins:id
+// @desc    Update pin
 // @access  Private
 router.put('/:id', auth, async (req, res) => {
   const { name, email, phone, type } = req.body;
 
-  // Build contact object
-  const contactFields = {};
-  if (name) contactFields.name = name;
-  if (email) contactFields.email = email;
-  if (phone) contactFields.phone = phone;
-  if (type) contactFields.type = type;
+  // Build pin object
+  const pinFields = {};
+  if (name) pinFields.name = name;
+  if (email) pinFields.email = email;
+  if (phone) pinFields.phone = phone;
+  if (type) pinFields.type = type;
 
   try {
-    let contact = await Contact.findById(req.params.id);
+    let pin = await Pin.findById(req.params.id);
 
-    if (!contact) return res.status(404).json({ msg: 'Contact not found.' });
+    if (!pin) return res.status(404).json({ msg: 'Pin not found.' });
 
-    // Make sure user owns contact
-    if (contact.user.toString() !== req.user.id) {
+    // Make sure user owns pin
+    if (pin.user.toString() !== req.user.id) {
       return res.status(401).json({ msg: 'Not Authorized' });
     }
 
-    contact = await Contact.findByIdAndUpdate(
+    pin = await Pin.findByIdAndUpdate(
       req.params.id,
-      { $set: contactFields },
+      { $set: pinFields },
       { new: true }
     );
-    res.json(contact);
+    res.json(pin);
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');
   }
 });
 
-// @route   DELETE api/contacts:id
-// @desc    Delete contact
+// @route   DELETE api/pins:id
+// @desc    Delete pin
 // @access  Private
 router.delete('/:id', auth, async (req, res) => {
   try {
-    let contact = await Contact.findById(req.params.id);
+    let pin = await Pin.findById(req.params.id);
 
-    if (!contact) return res.status(404).json({ msg: 'Contact not found.' });
+    if (!pin) return res.status(404).json({ msg: 'Pin not found.' });
 
-    // Make sure user owns contact
-    if (contact.user.toString() !== req.user.id) {
+    // Make sure user owns pin
+    if (pin.user.toString() !== req.user.id) {
       return res.status(401).json({ msg: 'Not Authorized' });
     }
 
-    await Contact.findByIdAndRemove(req.params.id);
+    await Pin.findByIdAndRemove(req.params.id);
 
-    res.json({ msg: 'Contact removed.' });
+    res.json({ msg: 'Pin removed.' });
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');

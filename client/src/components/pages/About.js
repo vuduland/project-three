@@ -1,14 +1,14 @@
 /** @format */
 
 import React from 'react';
-import ContactForm from '../contactForm/ContactForm';
-import Contacts from '../contacts/Contacts';
+import PinForm from '../pinForm/PinForm';
+import Pins from '../pins/Pins';
 
 export const About = () => {
   return (
     <div className='aboutpage'>
-      <ContactForm />
-      <Contacts />
+      <PinForm />
+      <Pins />
     </div>
   );
 };

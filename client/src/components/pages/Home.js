@@ -1,11 +1,9 @@
-import React from 'react'
+/** @format */
+
+import React from 'react';
 
 export const Home = () => {
-  return (
-    <div className="homepage">
-      {/* HMTL about page would go here */}
-    </div>
-  )
-}
+  return <div className='homepage'>{/* HMTL about page would go here */}</div>;
+};
 
-export default Home
+export default Home;

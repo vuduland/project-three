@@ -1,37 +1,36 @@
 /** @format */
 
 import {
-  GET_CONTACTS,
-  ADD_CONTACT,
-  DELETE_CONTACT,
+  GET_PINS,
+  ADD_PIN,
+  DELETE_PIN,
   SET_CURRENT,
   CLEAR_CURRENT,
-  UPDATE_CONTACT,
-  FILTER_CONTACTS,
+  UPDATE_PIN,
+  FILTER_PINS,
   CLEAR_FILTER,
-  // CONTACT_ERROR,
-  // CLEAR_CONTACTS
+  PIN_ERROR,
+  // CLEAR_PINS
 } from '../types';
 
 export default (state, action) => {
   switch (action.type) {
-    case GET_CONTACTS:
+    case GET_PINS:
       return {
         ...state,
-        contacts: action.payload,
+        pins: action.payload,
         loading: false,
       };
-    case ADD_CONTACT:
+    case ADD_PIN:
       return {
         ...state, // current state
-        contacts: [...state.contacts, action.payload], // state is immutable but the spread operator allows us to update our state
+        pins: [...state.pins, action.payload], // state is immutable but the spread operator allows us to update our state
+        loading: false,
       };
-    case DELETE_CONTACT:
+    case DELETE_PIN:
       return {
         ...state, // current state
-        contacts: state.contacts.filter(
-          contact => contact.id !== action.payload
-        ), // state.contacts === current contacts array; filer(...) is all contacts that are not in this id; action.payload is sent in the ContactItem component
+        pins: state.pins.filter(pin => pin.id !== action.payload), // state.pins === current pins array; filer(...) is all pins that are not in this id; action.payload is sent in the PinItem component
       };
     case SET_CURRENT:
       return {
@@ -43,25 +42,31 @@ export default (state, action) => {
         ...state,
         current: null,
       };
-    case UPDATE_CONTACT:
+    case UPDATE_PIN:
       return {
         ...state,
-        contacts: state.contacts.map(contact =>
-          contact.id === action.payload.id ? action.payload : contact
+        pins: state.pins.map(pin =>
+          pin.id === action.payload.id ? action.payload : pin
         ),
+        loading: false,
       };
-    case FILTER_CONTACTS:
+    case FILTER_PINS:
       return {
         ...state,
-        filtered: state.contacts.filter(contact => {
+        filtered: state.pins.filter(pin => {
           const regex = new RegExp(`${action.payload}`, 'gi'); // regex === Regular expression; gi === global insensitive (case)
-          return contact.name.match(regex) || contact.email.match(regex);
+          return pin.name.match(regex) || pin.email.match(regex);
         }), // High order array method, like map and match
       };
     case CLEAR_FILTER:
       return {
         ...state,
         filtered: null,
+      };
+    case PIN_ERROR:
+      return {
+        ...state,
+        error: action.payload,
       };
     default:
       return state;

@@ -10,14 +10,14 @@ import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 
 import AuthState from './context/auth/AuthState';
-import ContactState from './context/contact/ContactState';
+import PinState from './context/pins/PinState';
 import AlertState from './context/alert/AlertState';
 import './App.css';
 
 const App = () => {
   return (
     <AuthState>
-      <ContactState>
+      <PinState>
         <AlertState>
           <Router>
             <Fragment>
@@ -35,7 +35,7 @@ const App = () => {
             </Fragment>
           </Router>
         </AlertState>
-      </ContactState>
+      </PinState>
     </AuthState>
   );
 };

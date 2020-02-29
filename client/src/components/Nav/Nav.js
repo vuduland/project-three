@@ -1,3 +1,5 @@
+/** @format */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
@@ -28,20 +30,15 @@ const Nav = ({ title, icon }) => {
 
 Nav.propTypes = {
   title: PropTypes.string.isRequired,
-  icon: PropTypes.string
+  icon: PropTypes.string,
 };
 
 Nav.defaultProps = {
   title: 'KC Cleanup',
-  icon: 'fas fa-id-card-alt'
+  icon: 'fas fa-id-card-alt',
 };
 
 export default Nav;
-
-
-
-
-
 
 // import React from 'react';
 // import { Navbar, Icon, NavItem } from 'react-materialize';

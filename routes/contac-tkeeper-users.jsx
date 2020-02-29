@@ -12,7 +12,7 @@ const User = require('../models/User');
 // HTTP methods:
 /*
 GET: fetch data from the server
-POST: submitting something to the server, filling out form, or adding contact, etc.
+POST: submitting something to the server, filling out form, or adding pin, etc.
 PUT: update something that's already on the server
 DELETE: delete something from the server
 */

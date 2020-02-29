@@ -1,16 +1,17 @@
 /** @format */
-// Allows each individual contact in the list to have its own component
+
+// Allows each individual pin in the list to have its own component
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import ContactContext from '../../context/contact/contactContext';
+import PinContext from '../../context/pins/pinContext';
 
-const ContactItem = ({ contact }) => {
-  const contactContext = useContext(ContactContext);
-  const { deleteContact, setCurrent, clearCurrent } = contactContext;
+const PinItem = ({ pin }) => {
+  const pinContext = useContext(PinContext);
+  const { deletePin, setCurrent, clearCurrent } = pinContext;
 
-  const { id, name, email, phone, type } = contact;
+  const { _id, name, email, phone, type } = pin;
   const onDelete = () => {
-    deleteContact(id);
+    deletePin(_id);
     clearCurrent();
   };
 
@@ -23,8 +24,7 @@ const ContactItem = ({ contact }) => {
           className={
             'badge ' +
             (type === 'professional' ? 'badge-success' : 'badge-primary')
-          }
-        >
+          }>
           {type.charAt(0).toUpperCase() + type.slice(1)}
           {/* Return only first character of type as uppercase; add rest of type array to end with slice() method */}
         </span>
@@ -42,10 +42,7 @@ const ContactItem = ({ contact }) => {
         )}
       </ul>
       <p>
-        <button
-          className='btn btn-dark btn-sm'
-          onClick={() => setCurrent(contact)}
-        >
+        <button className='btn btn-dark btn-sm' onClick={() => setCurrent(pin)}>
           Edit
         </button>
         <button className='btn btn-danger btn-sm' onClick={onDelete}>
@@ -56,8 +53,8 @@ const ContactItem = ({ contact }) => {
   );
 };
 
-ContactItem.propTypes = {
-  contact: PropTypes.object.isRequired
+PinItem.propTypes = {
+  pin: PropTypes.object.isRequired,
 };
 
-export default ContactItem;
+export default PinItem;

@@ -1,18 +1,18 @@
 /** @format */
-// CRUD WORKS FOR CONTACTS
+// CRUD WORKS FOR PINS
 import React, { useState, useContext, useEffect } from 'react'; // useContext is a hook; probably useState as well
-import ContactContext from '../../context/contact/contactContext';
+import PinContext from '../../context/pin/pinContext';
 
-const ContactForm = () => {
-  const contactContext = useContext(ContactContext); // this should give access to any methods or state
+const PinForm = () => {
+  const pinContext = useContext(PinContext); // this should give access to any methods or state
 
-  const { addContact, updateContact, clearCurrent, current } = contactContext;
+  const { addPin, updatePin, clearCurrent, current } = pinContext;
 
   useEffect(() => {
     if (current !== null) {
-      setContact(current);
+      setPin(current);
     } else {
-      setContact({
+      setPin({
         // set it to default state
         name: '',
         email: '',
@@ -20,9 +20,9 @@ const ContactForm = () => {
         type: 'personal',
       });
     }
-  }, [contactContext, current]); // only calls useEffect if contactContext or current value is changed; also will get warning if brackets are empty
+  }, [pinContext, current]); // only calls useEffect if pinContext or current value is changed; also will get warning if brackets are empty
 
-  const [contact, setContact] = useState({
+  const [pin, setPin] = useState({
     // this is all the state of the form
     name: '',
     email: '',
@@ -30,27 +30,19 @@ const ContactForm = () => {
     type: 'personal',
   });
 
-  const { name, email, phone, type } = contact; // Whenever we change an input in the form, the value of these extracted variables
+  const { name, email, phone, type } = pin; // Whenever we change an input in the form, the value of these extracted variables
 
-  const onChange = e =>
-    setContact({ ...contact, [e.target.name]: e.target.value });
+  const onChange = e => setPin({ ...pin, [e.target.name]: e.target.value });
 
   const onSubmit = e => {
     e.preventDefault();
 
     if (current === null) {
-      addContact(contact);
+      addPin(pin);
     } else {
-      updateContact(contact);
+      updatePin(pin);
     }
     clearAll();
-    // addContact(contact);
-    // setContact({
-    //   name: '',
-    //   email: '',
-    //   phone: '',
-    //   type: 'personal'
-    // });
   };
 
   const clearAll = () => {
@@ -59,9 +51,7 @@ const ContactForm = () => {
 
   return (
     <form onSubmit={onSubmit}>
-      <h2 className='text-primary'>
-        {current ? 'Edit Contact' : 'Add Contact'}
-      </h2>
+      <h2 className='text-primary'>{current ? 'Edit Pin' : 'Add Pin'}</h2>
       <input
         type='text'
         placeholder='name'
@@ -83,7 +73,7 @@ const ContactForm = () => {
         value={phone}
         onChange={onChange}
       />
-      <h5>Contact Type</h5>
+      <h5>Pin Type</h5>
       <input
         type='radio'
         name='type'
@@ -103,7 +93,7 @@ const ContactForm = () => {
       <div>
         <input
           type='submit'
-          value={current ? 'Update Contact' : 'Add Contact'}
+          value={current ? 'Update Pin' : 'Add Pin'}
           className='btn btn-primary btn-block'
         />
       </div>
@@ -118,4 +108,4 @@ const ContactForm = () => {
   );
 };
 
-export default ContactForm;
+export default PinForm;

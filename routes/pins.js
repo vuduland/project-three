@@ -1,3 +1,5 @@
+/** @format */
+
 // CRUD ROUTE
 const express = require('express');
 const router = express.Router();
@@ -7,8 +9,8 @@ const { check, validationResult } = require('express-validator/check');
 const User = require('../models/User');
 const Pin = require('../models/Pin');
 
-// @route   GET api/contacts === pins
-// @desc    Get all user's contacts === pins
+// @route   GET api/pins === pins
+// @desc    Get all user's pins === pins
 // @access  Private
 router.get('/', auth, async (req, res) => {
   try {
@@ -16,7 +18,7 @@ router.get('/', auth, async (req, res) => {
     const pins = await Pin.find({ location }).sort(
       // sorts by date, descending order?
       {
-        date: -1
+        date: -1,
       }
     );
     res.json(pins);
@@ -26,8 +28,8 @@ router.get('/', auth, async (req, res) => {
   }
 });
 
-// @route   POST api/contacts === pins
-// @desc    Add new contact === pin
+// @route   POST api/pins === pins
+// @desc    Add new pin === pin
 // @access  Private or Public?
 router.post(
   '/',
@@ -39,8 +41,8 @@ router.post(
         .isEmpty(),
       check('lng', 'Longitude is required')
         .not()
-        .isEmpty()
-    ]
+        .isEmpty(),
+    ],
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -59,7 +61,7 @@ router.post(
         // location: req.lng
         objId: req.objId.id,
         date,
-        type
+        type,
       });
 
       const pin = await newPin.save();
@@ -72,8 +74,8 @@ router.post(
   }
 );
 
-// @route   PUT api/contacts:id ||
-// @desc    Update contact === pin
+// @route   PUT api/pins:id ||
+// @desc    Update pin === pin
 // @access  Private or public?
 router.put('/:id', auth, async (req, res) => {
   const { lat, lng, date, type } = req.body;
@@ -91,7 +93,7 @@ router.put('/:id', auth, async (req, res) => {
 
     if (!pin) return res.status(404).json({ msg: 'Pin not found.' });
 
-    // Make sure user owns contact
+    // Make sure user owns pin
     if (pin.user.toString() !== req.user.id) {
       return res.status(401).json({ msg: 'Not Authorized' });
     }
@@ -108,8 +110,8 @@ router.put('/:id', auth, async (req, res) => {
   }
 });
 
-// @route   DELETE api/contacts:id
-// @desc    Delete contact
+// @route   DELETE api/pins:id
+// @desc    Delete pin
 // @access  Private
 router.delete('/:id', auth, async (req, res) => {
   try {
@@ -117,7 +119,7 @@ router.delete('/:id', auth, async (req, res) => {
 
     if (!pin) return res.status(404).json({ msg: 'Pin not found.' });
 
-    // Make sure user owns contact
+    // Make sure user owns pin
     if (pin.user.toString() !== req.user.id) {
       return res.status(401).json({ msg: 'Not Authorized' });
     }

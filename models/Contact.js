@@ -3,7 +3,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const ContactSchema = new Schema({
+const PinSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
     ref: 'users',
@@ -28,4 +28,4 @@ const ContactSchema = new Schema({
   },
 });
 
-module.exports = mongoose.model('contact', ContactSchema);
+module.exports = mongoose.model('pin', PinSchema);
