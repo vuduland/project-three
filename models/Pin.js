@@ -17,6 +17,10 @@ const PinSchema = new Schema({
   objId: {
     type: Schema.Types.ObjectId
   },
+  picUrl: {
+    type: String,
+    required: false
+  },
   type: {
     type: String,
     default: 'trashed' // alternate is cleaned

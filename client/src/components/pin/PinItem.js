@@ -1,15 +1,15 @@
-// Allows each individual contact in the list to have its own component
+// Allows each individual pin in the list to have its own component
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import ContactContext from '../../context/contact/contactContext';
+import PinContext from '../../context/pin/pinContext';
 
-const ContactItem = ({ contact }) => {
-  const contactContext = useContext(ContactContext);
-  const { deleteContact, setCurrent, clearCurrent } = contactContext;
+const PinItem = ({ pin }) => {
+  const pinContext = useContext(PinContext);
+  const { deletePin, setCurrent, clearCurrent } = pinContext;
 
-  const { _id, name, email, phone, type } = contact;
+  const { _id, name, email, phone, type } = pin;
   const onDelete = () => {
-    deleteContact(_id);
+    deletePin(_id);
     clearCurrent();
   };
 
@@ -21,7 +21,7 @@ const ContactItem = ({ contact }) => {
           style={{ float: 'right' }}
           className={
             'badge ' +
-            (type === 'Clean' ? 'badge-success' : 'badge-primary')
+            (type === 'professional' ? 'badge-success' : 'badge-primary')
           }
         >
           {type.charAt(0).toUpperCase() + type.slice(1)}
@@ -43,7 +43,7 @@ const ContactItem = ({ contact }) => {
       <p>
         <button
           className='btn btn-dark btn-sm'
-          onClick={() => setCurrent(contact)}
+          onClick={() => setCurrent(pin)}
         >
           Edit
         </button>
@@ -55,8 +55,8 @@ const ContactItem = ({ contact }) => {
   );
 };
 
-ContactItem.propTypes = {
-  contact: PropTypes.object.isRequired
+PinItem.propTypes = {
+  pin: PropTypes.object.isRequired
 };
 
-export default ContactItem;
+export default PinItem;

@@ -1,11 +1,11 @@
 import React, { useContext, useRef, useEffect } from 'react';
-import ContactContext from '../../context/contact/contactContext';
+import PinContext from '../../context/pin/pinContext';
 
-const ContactFilter = () => {
-  const contactContext = useContext(ContactContext);
+const PinFilter = () => {
+  const pinContext = useContext(PinContext);
   const text = useRef('');
 
-  const { filterContacts, clearFilter, filtered } = contactContext;
+  const { filterPins, clearFilter, filtered } = pinContext;
   useEffect(() => {
     if (filtered === null) {
       // if it's not filtered the text displays nothing
@@ -16,19 +16,19 @@ const ContactFilter = () => {
 
   const onChange = e => {
     if (text.current.value !== '') {
-      filterContacts(e.target.value);
+      filterPins(e.target.value);
     } else {
       clearFilter();
     }
   };
 
   return (
-    <div class = "hide">
+    <div>
       <form>
         <input
           ref={text}
           type='text'
-          placeholder='filter'
+          placeholder='Filer Pins...'
           onChange={onChange}
         />
       </form>
@@ -36,4 +36,4 @@ const ContactFilter = () => {
   );
 };
 
-export default ContactFilter;
+export default PinFilter;

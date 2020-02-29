@@ -1,42 +1,42 @@
 import React, { useState, useContext, useEffect } from 'react';
-import ContactContext from '../../context/contact/contactContext';
+import PinContext from '../../context/pin/pinContext';
 
-const ContactForm = () => {
-  const contactContext = useContext(ContactContext);
+const PinForm = () => {
+  const pinContext = useContext(PinContext);
 
-  const { addContact, updateContact, clearCurrent, current } = contactContext;
+  const { addPin, updatePin, clearCurrent, current } = pinContext;
 
   useEffect(() => {
     if (current !== null) {
-      setContact(current);
+      setPin(current);
     } else {
-      setContact({
+      setPin({
         name: '',
-        email: '',
-        phone: '',
+        lat: '',
+        lng: '',
         type: 'trash'
       });
     }
-  }, [contactContext, current]);
+  }, [pinContext, current]);
 
-  const [contact, setContact] = useState({
+  const [pin, setPin] = useState({
     name: '',
-    email: '',
+    lat: '',
     phone: '',
-    type: 'trash'
+    type: 'personal'
   });
 
-  const { name, email, phone, type } = contact;
+  const { name, lat, phone, type } = pin;
 
   const onChange = e =>
-    setContact({ ...contact, [e.target.name]: e.target.value });
+    setPin({ ...pin, [e.target.name]: e.target.value });
 
   const onSubmit = e => {
     e.preventDefault();
     if (current === null) {
-      addContact(contact);
+      addPin(pin);
     } else {
-      updateContact(contact);
+      updatePin(pin);
     }
     clearAll();
   };
@@ -48,30 +48,30 @@ const ContactForm = () => {
   return (
     <form onSubmit={onSubmit}>
       <h2 className='text-primary'>
-        {current ? 'Mark Clean' : 'Report Trash'}
+        {current ? 'Clean Trash' : 'Report Trash'}
       </h2>
       <input
         type='text'
-        placeholder='comment'
+        placeholder='name'
         name='name'
         value={name}
         onChange={onChange}
       />
       <input
-        type='text'
+        type='lat'
         placeholder='lat'
-        name='email'
-        value={email}
+        name='lat'
+        value={lat}
         onChange={onChange}
       />
       <input
         type='text'
-        placeholder='lng'
+        placeholder='Phone'
         name='phone'
         value={phone}
         onChange={onChange}
       />
-      {/* <h5>Status</h5>
+      <h5>Pin Type</h5>
       <input
         type='radio'
         name='type'
@@ -79,19 +79,19 @@ const ContactForm = () => {
         checked={type === 'trash'}
         onChange={onChange}
       />{' '}
-      Trashed{' '} */}
-      {/* <input
+      trash{' '}
+      <input
         type='radio'
         name='type'
         value='clean'
         checked={type === 'clean'}
         onChange={onChange}
       />{' '}
-      Cleaned */}
+      clean
       <div>
         <input
           type='submit'
-          value={current ? 'Do Good' : 'Report'}
+          value={current ? 'Update Pin' : 'Add Pin'}
           className='btn btn-primary btn-block'
         />
       </div>
@@ -106,4 +106,4 @@ const ContactForm = () => {
   );
 };
 
-export default ContactForm;
+export default PinForm;
