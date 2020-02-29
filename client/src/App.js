@@ -1,27 +1,24 @@
+/** @format */
 import React, { Fragment } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import GoogleApiWrapper from './components/DisplayMap/DisplayMap';
-import Nav from './components/Nav/Nav';
+import Navbar from './components/layout/Navbar';
 import Home from './components/pages/Home';
 import About from './components/pages/About';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
-
-
 import AuthState from './context/auth/AuthState';
-import ContactState from './context/contact/ContactState';
+import PinState from './context/pin/PinState';
 import AlertState from './context/alert/AlertState';
 import './App.css';
-
 const App = () => {
-
-    return (
-          <AuthState>
-      <ContactState>
+  return (
+    <AuthState>
+      <PinState>
         <AlertState>
-        <Router>
-          <Fragment>
-            <Nav /> {/* Navbar */}
+          <Router>
+            <Fragment>
+              <Navbar /> {/* Navbar */}
               {/* div with switch case and links */}
               <div className='container'>
                 <Switch>
@@ -31,13 +28,21 @@ const App = () => {
                   <Route exact path='/login' component={Login} />
                 </Switch>
               </div>
-            <GoogleApiWrapper />
-          </Fragment>
-        </Router>
-                </AlertState>
-      </ContactState>
+              <GoogleApiWrapper />
+            </Fragment>
+          </Router>
+        </AlertState>
+      </PinState>
     </AuthState>
-    );
-  };
-
+  );
+};
 export default App;
+
+
+
+
+
+
+
+
+

@@ -1,11 +1,17 @@
-import React from 'react'
+import React from 'react';
 
-export const About = () => {
+const About = () => {
   return (
-    <div className="aboutpage">
-      {/* HMTL about page would go here */}
+    <div>
+      <h1>About This App</h1>
+      <p className='my-1'>
+        This is a full stack React app for keeping pins
+      </p>
+      <p className='bg-dark p'>
+        <strong>Version: </strong> 1.0.0
+      </p>
     </div>
-  )
-}
+  );
+};
 
-export default About
+export default About;
