@@ -5,13 +5,13 @@ const { check, validationResult } = require('express-validator/check');
 
 const User = require('../models/User');
 const Pin = require('../models/Pin');
-
+//paste in router.get pin.find
 // @route     GET api/pins
 // @desc      Get all users pins
 // @access    Private
-router.get('/', auth, async (req, res) => {
+router.get('/', async (req, res) => {
   try {
-    const pins = await Pin.find({ user: req.user.id }).sort({
+    const pins = await Pin.find({  }).sort({
       date: -1
     });
     res.json(pins);
