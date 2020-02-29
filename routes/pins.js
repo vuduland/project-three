@@ -1,4 +1,3 @@
-// CRUD ROUTE
 const express = require('express');
 const router = express.Router();
 const auth = require('../middleware/auth');
@@ -7,18 +6,14 @@ const { check, validationResult } = require('express-validator/check');
 const User = require('../models/User');
 const Pin = require('../models/Pin');
 
-// @route   GET api/contacts === pins
-// @desc    Get all user's contacts === pins
-// @access  Private
+// @route     GET api/pins
+// @desc      Get all users pins
+// @access    Private
 router.get('/', auth, async (req, res) => {
   try {
-    // or { location: req.lat, location: req.lng }
-    const pins = await Pin.find({ location }).sort(
-      // sorts by date, descending order?
-      {
-        date: -1
-      }
-    );
+    const pins = await Pin.find({ user: req.user.id }).sort({
+      date: -1
+    });
     res.json(pins);
   } catch (err) {
     console.error(err.message);
@@ -26,18 +21,15 @@ router.get('/', auth, async (req, res) => {
   }
 });
 
-// @route   POST api/contacts === pins
-// @desc    Add new contact === pin
-// @access  Private or Public?
+// @route     POST api/pins
+// @desc      Add new pin
+// @access    Private
 router.post(
   '/',
   [
     auth,
     [
-      check('lat', 'Latitude is required')
-        .not()
-        .isEmpty(),
-      check('lng', 'Longitude is required')
+      check('name', 'Name is required')
         .not()
         .isEmpty()
     ]
@@ -47,53 +39,51 @@ router.post(
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    // how do we pull this data from the pic's metadata? and how do we link it here?
-    const { lat, lng, date, type } = req.body;
+
+    const { name, lat, lng, picUrl, type } = req.body;
 
     try {
       const newPin = new Pin({
+        name,
         lat,
-        lng,
-        // or:
-        // location: req.lat,
-        // location: req.lng
-        objId: req.objId.id,
-        date,
-        type
+        lng, 
+        picUrl,
+        type,
+        user: req.user.id
       });
 
       const pin = await newPin.save();
 
       res.json(pin);
     } catch (err) {
-      console.error(err.message);
+      console.error(er.message);
       res.status(500).send('Server Error');
     }
   }
 );
 
-// @route   PUT api/contacts:id ||
-// @desc    Update contact === pin
-// @access  Private or public?
+// @route     PUT api/pins/:id
+// @desc      Update pin
+// @access    Private
 router.put('/:id', auth, async (req, res) => {
-  const { lat, lng, date, type } = req.body;
+  const { name, lat, lng, picUrl, type } = req.body;
 
-  // Build pin object  !!!! PAUSED REFACTORING HERE !!!
+  // Build pin object
   const pinFields = {};
-  // if (address) pinFields.address = address;
+  if (name) pinFields.name = name;
   if (lat) pinFields.lat = lat;
   if (lng) pinFields.lng = lng;
-  if (date) pinFields.date = date;
+  if (picUrl) pinFields.picUrl = picUrl;
   if (type) pinFields.type = type;
 
   try {
     let pin = await Pin.findById(req.params.id);
 
-    if (!pin) return res.status(404).json({ msg: 'Pin not found.' });
+    if (!pin) return res.status(404).json({ msg: 'Pin not found' });
 
-    // Make sure user owns contact
+    // Make sure user owns pin
     if (pin.user.toString() !== req.user.id) {
-      return res.status(401).json({ msg: 'Not Authorized' });
+      return res.status(401).json({ msg: 'Not authorized' });
     }
 
     pin = await Pin.findByIdAndUpdate(
@@ -101,30 +91,31 @@ router.put('/:id', auth, async (req, res) => {
       { $set: pinFields },
       { new: true }
     );
+
     res.json(pin);
   } catch (err) {
-    console.error(err.message);
+    console.error(er.message);
     res.status(500).send('Server Error');
   }
 });
 
-// @route   DELETE api/contacts:id
-// @desc    Delete contact
-// @access  Private
+// @route     DELETE api/pins/:id
+// @desc      Delete pin
+// @access    Private
 router.delete('/:id', auth, async (req, res) => {
   try {
     let pin = await Pin.findById(req.params.id);
 
-    if (!pin) return res.status(404).json({ msg: 'Pin not found.' });
+    if (!pin) return res.status(404).json({ msg: 'Pin not found' });
 
-    // Make sure user owns contact
+    // Make sure user owns pin
     if (pin.user.toString() !== req.user.id) {
-      return res.status(401).json({ msg: 'Not Authorized' });
+      return res.status(401).json({ msg: 'Not authorized' });
     }
 
     await Pin.findByIdAndRemove(req.params.id);
 
-    res.json({ msg: 'Pin removed.' });
+    res.json({ msg: 'Pin removed' });
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');

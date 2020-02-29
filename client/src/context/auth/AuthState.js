@@ -1,5 +1,3 @@
-/** @format */
-
 // the state files are where "actions" come from
 import React, { useReducer } from 'react'; // to have access to state and also dispatch, to dispatch to our reducer
 import axios from 'axios';
@@ -26,8 +24,10 @@ const AuthState = props => {
     error: null
   };
 
+
   const [state, dispatch] = useReducer(authReducer, initialState); // state allows access to anything in our state; dispatch allows us to dispatch objects to the reducer
   // LOAD USER
+
   const loadUser = async () => {
     setAuthToken(localStorage.token);
 
@@ -43,13 +43,9 @@ const AuthState = props => {
     }
   };
 
+
   // REGISTER USER
   const register = async formData => {
-    // const config = {
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   }
-    // };
 
     try {
       const res = await axios.post('/api/users', formData);
@@ -70,11 +66,6 @@ const AuthState = props => {
 
   // LOGIN USER
   const login = async formData => {
-    // const config = {
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   }
-    // };
 
     try {
       const res = await axios.post('/api/auth', formData);
@@ -100,7 +91,8 @@ const AuthState = props => {
   // LOGOUT
   const logout = () => dispatch({ type: LOGOUT });
 
-  // CLEAR ERRORS
+  // Clear Errors
+
   const clearErrors = () => dispatch({ type: CLEAR_ERRORS });
 
   return (

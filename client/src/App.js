@@ -1,27 +1,32 @@
 /** @format */
 
+
 import React, { Fragment } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import GoogleApiWrapper from './components/DisplayMap/DisplayMap';
 import Nav from './components/nav/Nav';
+
 import Home from './components/pages/Home';
 import About from './components/pages/About';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 
 import AuthState from './context/auth/AuthState';
-import ContactState from './context/contact/ContactState';
+import PinState from './context/pin/PinState';
 import AlertState from './context/alert/AlertState';
 import './App.css';
-
 const App = () => {
   return (
     <AuthState>
-      <ContactState>
+
+      // <ContactState>
+      //   <AlertState>
+      <PinState>
         <AlertState>
           <Router>
             <Fragment>
               <Nav /> {/* Navbar */}
+
               {/* div with switch case and links */}
               <div className='container'>
                 <Switch>
@@ -35,7 +40,8 @@ const App = () => {
             </Fragment>
           </Router>
         </AlertState>
-      </ContactState>
+      // </ContactState>
+      </PinState>
     </AuthState>
   );
 };
