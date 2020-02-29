@@ -32,12 +32,12 @@ const PinItem = ({ pin }) => {
         <ul className='list'>
           {lat && (
             <li>
-              <i className='fas fa-envelope-open' /> {lat}
+              <i className='fas fa-compass' /> {lat}
             </li>
           )}
           {lng && (
             <li>
-              <i className='fas fa-lng' /> {lng}
+              <i className='fas fa-compass' /> {lng}
             </li>
           )}
         </ul>

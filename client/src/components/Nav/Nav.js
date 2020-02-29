@@ -18,7 +18,7 @@ const Nav = ({ title, icon }) => {
           <Link to='/'>Home</Link>
         </li>
         <li>
-          <Link to='/about'>About</Link>
+          <Link to='/api/contacts'>Pins</Link>
         </li>
         <li>
           <Link to='/register'>Register</Link>
