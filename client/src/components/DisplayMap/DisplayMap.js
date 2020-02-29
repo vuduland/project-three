@@ -14,7 +14,7 @@ export class MapContainer extends Component {
         comment: 'This was dumped here on tuesday',
         lat: 39.076119,
         lng: -94.580249,
-        url: './assets/images/moreTrash.jpg'
+        url: '../assets/images/24th&Flora.jpg'
       },
       {
         id: '2',
@@ -70,11 +70,11 @@ export class MapContainer extends Component {
           <Row>
             <Col s={12}>
               <Card
-                closeIcon={<Icon>close</Icon>}
+                closeicon={<Icon>close</Icon>}
                 header={
                   <CardTitle image={this.state.selectedPlace.url}></CardTitle>
                 }
-                revealIcon={<Icon>more_vert</Icon>}
+                revealicon={<Icon>more_vert</Icon>}
               >
                 {this.state.selectedPlace.comment}
               </Card>
