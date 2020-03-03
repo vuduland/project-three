@@ -25,7 +25,7 @@ const Register = props => {
     name: '',
     email: '',
     password: '',
-    password2: '',
+    password2: ''
   });
 
   const { name, email, password, password2 } = user;
@@ -42,7 +42,7 @@ const Register = props => {
       register({
         name,
         email,
-        password,
+        password
       });
     }
   };
@@ -65,7 +65,7 @@ const Register = props => {
           />
         </div>
         <div className='form-group'>
-          <label htmlFor='email'>email Address</label>
+          <label htmlFor='email'>Email Address</label>
           <input
             id='email'
             type='email'

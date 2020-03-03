@@ -1,12 +1,11 @@
 import React from 'react';
-import ContactForm from '../contactForm/ContactForm';
 import Contacts from '../contacts/Contacts';
+import ContactForm from '../contacts/ContactForm';
 import ContactFilter from '../contacts/ContactFilter';
 
-
-const About = () => {
+const Home = () => {
   return (
-    <div className='aboutpage'>
+    <div className='grid-2'>
       <div>
         <ContactForm />
       </div>
@@ -18,4 +17,4 @@ const About = () => {
   );
 };
 
-export default About;
+export default Home;

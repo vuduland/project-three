@@ -1,4 +1,5 @@
-import React, { useReducer } from 'react';
+// the state files are where "actions" come from
+import React, { useReducer } from 'react'; // to have access to state and also dispatch, to dispatch to our reducer
 import axios from 'axios';
 import AuthContext from './authContext';
 import authReducer from './authReducer';
@@ -23,9 +24,10 @@ const AuthState = props => {
     error: null
   };
 
-  const [state, dispatch] = useReducer(authReducer, initialState);
 
-  // Load User
+  const [state, dispatch] = useReducer(authReducer, initialState); // state allows access to anything in our state; dispatch allows us to dispatch objects to the reducer
+  // LOAD USER
+
   const loadUser = async () => {
     setAuthToken(localStorage.token);
 
@@ -41,16 +43,12 @@ const AuthState = props => {
     }
   };
 
-  // Register User
+
+  // REGISTER USER
   const register = async formData => {
-    const config = {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    };
 
     try {
-      const res = await axios.post('/api/users', formData, config);
+      const res = await axios.post('/api/users', formData);
 
       dispatch({
         type: REGISTER_SUCCESS,
@@ -66,21 +64,19 @@ const AuthState = props => {
     }
   };
 
-  // Login User
+  // LOGIN USER
   const login = async formData => {
-    const config = {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    };
 
     try {
-      const res = await axios.post('/api/auth', formData, config);
+      const res = await axios.post('/api/auth', formData);
 
       dispatch({
         type: LOGIN_SUCCESS,
         payload: res.data
       });
+      console.log(
+        `${res.data} === res.data \n  ${LOGIN_SUCCESS} === LOGIN_SUCCESS \n ${res} === res`
+      );
 
       loadUser();
     } catch (err) {
@@ -88,13 +84,15 @@ const AuthState = props => {
         type: LOGIN_FAIL,
         payload: err.response.data.msg
       });
+      // console.log(err.response.data.msg + '\n err.response.data.msg');
     }
   };
 
-  // Logout
+  // LOGOUT
   const logout = () => dispatch({ type: LOGOUT });
 
   // Clear Errors
+
   const clearErrors = () => dispatch({ type: CLEAR_ERRORS });
 
   return (

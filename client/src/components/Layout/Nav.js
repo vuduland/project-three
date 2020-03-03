@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import AuthContext from '../../context/auth/authContext';
 import ContactContext from '../../context/contact/contactContext';
 
-const Navbar = ({ title, icon }) => {
+const Nav = ({ title, icon }) => {
   const authContext = useContext(AuthContext);
   const contactContext = useContext(ContactContext);
 
@@ -32,7 +32,6 @@ const Navbar = ({ title, icon }) => {
       </li>
     </Fragment>
   );
-
   const guestLinks = (
     <Fragment>
       <li>
@@ -56,14 +55,47 @@ const Navbar = ({ title, icon }) => {
   );
 };
 
-Navbar.propTypes = {
+Nav.propTypes = {
   title: PropTypes.string.isRequired,
   icon: PropTypes.string
 };
 
-Navbar.defaultProps = {
-  title: 'Contact Keeper',
+Nav.defaultProps = {
+  title: 'KC Cleanup',
   icon: 'fas fa-id-card-alt'
 };
 
-export default Navbar;
+export default Nav;
+
+// import React from 'react';
+// import { Navbar, Icon, NavItem } from 'react-materialize';
+// function Nav() {
+//   return (
+//     <Navbar
+//       alignLinks='right'
+//       brand={
+//         <a className='brand-logo' href='/'>
+//           KC Cleanup
+//         </a>
+//       }
+//       menuIcon={<Icon>menu</Icon>}
+//       options={{
+//         draggable: true,
+//         edge: 'left',
+//         inDuration: 250,
+//         onCloseEnd: null,
+//         onCloseStart: null,
+//         onOpenEnd: null,
+//         onOpenStart: null,
+//         outDuration: 200,
+//         preventScrolling: false
+//       }}
+//       sidenav={<li>Custom node!</li>}
+//     >
+//       <NavItem href='/'>Getting started</NavItem>
+//       <NavItem href='/'>Components</NavItem>
+//     </Navbar>
+//   );
+// }
+
+// export default Nav;
