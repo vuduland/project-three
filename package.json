@@ -5,9 +5,9 @@
   "main": "server.js",
   "proxy": "http://localhost:5000",
   "scripts": {
-    "start": "if-env NODE_ENV=production && npm run prod || npm run dev",
+    "start": "npm run client",
     "prod": "node server.js",
-    "dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
+    "dev": "\"npm run client\"",
     "server": "nodemon server.js",
     "client": "cd client && npm run start",
     "seed": "node scripts/seedDB.js",
