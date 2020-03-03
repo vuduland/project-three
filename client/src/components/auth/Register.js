@@ -48,13 +48,6 @@ const Register = props => {
     }
   };
 
-  // <form id="login" action="signup.php" method="post">
-  //   <input type="text" autocomplete="username">
-  //   <input type="password" autocomplete="new-password">
-  //   <input type="password" autocomplete="new-password">
-  //   <input type="submit" value="Sign Up!">
-  // </form>
-
   return (
     <div className='form-container'>
       <h1>
