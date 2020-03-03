@@ -1,41 +1,52 @@
-/** @format */
-
-import React, { Fragment, useContext } from 'react';
+import React, { Fragment, useContext, useEffect } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import ContactItem from './ContactItem';
-import ContactContext from '../../context/contact/contactContext';
+import PinItem from './PinItem';
+import Spinner from '../layout/Spinner';
+import PinContext from '../../context/pin/pinContext';
 
-const Contacts = () => {
-  const contactContext = useContext(ContactContext);
+const Pins = () => {
+  const pinContext = useContext(PinContext);
 
-  const { contacts, filtered } = contactContext;
+  const { pins, filtered, getPins, loading } = pinContext;
 
-  if (contacts.length === 0) {
-    // if there are no contacts, returns a message
-    return <h4>Please add a contact.</h4>;
+  useEffect(() => {
+    getPins();
+    // eslint-disable-next-line
+  }, []);
+
+  if (pins !== null && pins.length === 0 && !loading) {
+    return <h4>No Trash Yet</h4>;
   }
 
-  // Embedded in Home.js
   return (
-    // checking if filtered is empty, if it is not, it shows what is in filtered, if not, it shows nothing.
     <Fragment>
-      <TransitionGroup>
-        {filtered !== null
-          ? filtered.map(contact => (
-              // key must be on the direct/top/primary element
-              // classNames is plural for some reason
-              <CSSTransition key={contact.id} timeout={1000} classNames='item'>
-                <ContactItem contact={contact} />
-              </CSSTransition>
-            ))
-          : contacts.map(contact => (
-              <CSSTransition key={contact.id} timeout={1000} classNames='item'>
-                <ContactItem contact={contact} />
-              </CSSTransition>
-            ))}
-      </TransitionGroup>
+      {pins !== null && !loading ? (
+        <TransitionGroup>
+          {filtered !== null
+            ? filtered.map(pin => (
+                <CSSTransition
+                  key={pin._id}
+                  timeout={500}
+                  classNames='item'
+                >
+                  <PinItem pin={pin} />
+                </CSSTransition>
+              ))
+            : pins.map(pin => (
+                <CSSTransition
+                  key={pin._id}
+                  timeout={500}
+                  classNames='item'
+                >
+                  <PinItem pin={pin} />
+                </CSSTransition>
+              ))}
+        </TransitionGroup>
+      ) : (
+        <Spinner />
+      )}
     </Fragment>
   );
 };
 
-export default Contacts;
+export default Pins;

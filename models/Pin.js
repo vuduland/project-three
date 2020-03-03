@@ -1,25 +1,27 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
 
-const PinSchema = new Schema({
-  // address: {
-  //   type: String
-  // },
-  // location: {
+const PinSchema = mongoose.Schema({
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'users'
+  },
+  name: {
+    type: String,
+    required: true
+  },
   lat: {
     type: String,
     required: true
   },
   lng: {
-    type: String,
-    required: true
+    type: String
   },
-  objId: {
-    type: Schema.Types.ObjectId
+  picUrl: {
+    type: String
   },
   type: {
     type: String,
-    default: 'trashed' // alternate is cleaned
+    default: 'Trash'
   },
   date: {
     type: Date,

@@ -4,31 +4,31 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 const auth = require('../middleware/auth');
-const { check, validationResult } = require('express-validator/check'); // or express-validator/check
+const { check, validationResult } = require('express-validator/check');
 
 const User = require('../models/User');
 
-// @route   GET api/auth
-// @desc    Get logged in user
-// @access  Private
+// @route     GET api/auth
+// @desc      Get logged in user
+// @access    Private
 router.get('/', auth, async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select('-password');
     res.json(user);
   } catch (err) {
     console.error(err.message);
-    res.status(500).send('Server Error.');
+    res.status(500).send('Server Error');
   }
 });
 
-// @route   POST api/auth --> same URL as above: ok because we are using different HTTP methods
-// @desc    Auth user and get token
-// @access  Public
+// @route     POST api/auth
+// @desc      Auth user & get token
+// @access    Public
 router.post(
   '/',
   [
     check('email', 'Please include a valid email').isEmail(),
-    check('password', 'Password is required.').exists()
+    check('password', 'Password is required').exists()
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -60,7 +60,9 @@ router.post(
       jwt.sign(
         payload,
         config.get('jwtSecret'),
-        { expiresIn: 360000 },
+        {
+          expiresIn: 360000
+        },
         (err, token) => {
           if (err) throw err;
           res.json({ token });
@@ -68,7 +70,7 @@ router.post(
       );
     } catch (err) {
       console.error(err.message);
-      res.status(500).send('Server error');
+      res.status(500).send('Server Error');
     }
   }
 );

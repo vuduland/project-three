@@ -7,27 +7,19 @@ const { check, validationResult } = require('express-validator/check');
 
 const User = require('../models/User');
 
-// HTTP methods:
-/*
-GET: fetch data from the server
-POST: submitting something to the server, filling out form, or adding contact, etc.
-PUT: update something that's already on the server
-DELETE: delete something from the server
-*/
-
-// @route   POST api/users
-// @desc    Register a user
-// @access  Public
+// @route     POST api/users
+// @desc      Regiter a user
+// @access    Public
 router.post(
   '/',
   [
-    check('name', 'Please add name.')
+    check('name', 'Please add name')
       .not()
       .isEmpty(),
     check('email', 'Please include a valid email').isEmail(),
     check(
       'password',
-      'Please enter a password with six or more characters'
+      'Please enter a password with 6 or more characters'
     ).isLength({ min: 6 })
   ],
   async (req, res) => {
@@ -74,11 +66,9 @@ router.post(
           res.json({ token });
         }
       );
-
-      // res.send('User saved');
     } catch (err) {
       console.error(err.message);
-      res.status(500).send('Server error'); // we get a very generic Server error here; try to find a specific error code after vids
+      res.status(500).send('Server Error');
     }
   }
 );

@@ -1,10 +1,15 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import AuthContext from '../../context/auth/authContext';
+import PinContext from '../../context/pin/pinContext'
 
 const Nav = ({ title, icon }) => {
+  const authContext = useContext(AuthContext);
+  const pinContext = useContext(PinContext);
+  
   return (
-    <div className='navbar bg-primary'>
+    <div className='navbar bg-primary sticky-top'>
       <h1>
         <i className={icon} /> {title}
       </h1>
@@ -13,7 +18,7 @@ const Nav = ({ title, icon }) => {
           <Link to='/'>Home</Link>
         </li>
         <li>
-          <Link to='/about'>About</Link>
+          <Link to='/api/contacts'>Pins</Link>
         </li>
         <li>
           <Link to='/register'>Register</Link>
@@ -25,53 +30,13 @@ const Nav = ({ title, icon }) => {
     </div>
   );
 };
-
 Nav.propTypes = {
   title: PropTypes.string.isRequired,
   icon: PropTypes.string
 };
-
 Nav.defaultProps = {
   title: 'KC Cleanup',
   icon: 'fas fa-id-card-alt'
 };
 
 export default Nav;
-
-
-
-
-
-
-// import React from 'react';
-// import { Navbar, Icon, NavItem } from 'react-materialize';
-// function Nav() {
-//   return (
-//     <Navbar
-//       alignLinks='right'
-//       brand={
-//         <a className='brand-logo' href='/'>
-//           KC Cleanup
-//         </a>
-//       }
-//       menuIcon={<Icon>menu</Icon>}
-//       options={{
-//         draggable: true,
-//         edge: 'left',
-//         inDuration: 250,
-//         onCloseEnd: null,
-//         onCloseStart: null,
-//         onOpenEnd: null,
-//         onOpenStart: null,
-//         outDuration: 200,
-//         preventScrolling: false
-//       }}
-//       sidenav={<li>Custom node!</li>}
-//     >
-//       <NavItem href='/'>Getting started</NavItem>
-//       <NavItem href='/'>Components</NavItem>
-//     </Navbar>
-//   );
-// }
-
-// export default Nav;
