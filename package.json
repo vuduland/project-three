@@ -7,7 +7,7 @@
   "scripts": {
     "start": "npm run client",
     "prod": "node server.js",
-    "dev": "\"npm run client\"",
+    "dev": "npm run client",
     "server": "nodemon server.js",
     "client": "cd client && npm run start",
     "seed": "node scripts/seedDB.js",
