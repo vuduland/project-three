@@ -5,10 +5,8 @@
   "main": "server.js",
   "proxy": "http://localhost:5000",
   "scripts": {
-    "start": "npm run client",
+    "start": "npm run prod",
     "prod": "node server.js",
-    "dev": "npm run client",
-    "server": "nodemon server.js",
     "client": "cd client && npm run start",
     "seed": "node scripts/seedDB.js",
     "install": "cd client && npm install",
