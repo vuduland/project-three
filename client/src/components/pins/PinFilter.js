@@ -22,15 +22,15 @@ const PinFilter = () => {
   };
 
   return (
- <div classname = "d-none d-block">
-    <form>
-      <input
-        ref={text}
-        type='text'
-        placeholder='Enter trash to the left'
-        onChange={onChange}
-      />
-    </form>
+    <div className='d-none d-block'>
+      <form>
+        <input
+          ref={text}
+          type='text'
+          placeholder='Enter trash to the left'
+          onChange={onChange}
+        />
+      </form>
     </div>
   );
 };

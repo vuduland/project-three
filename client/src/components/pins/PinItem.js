@@ -15,15 +15,14 @@ const PinItem = ({ pin }) => {
 
   return (
     <div className='card bg-light'>
-      <img class="card-img-top" src={picUrl} alt={name} />
-      <div class="card-body">
+      <img className='card-img-top' src={picUrl} alt={name} />
+      <div className='card-body'>
         <h3 className='text-primary text-left'>
           {name}{' '}
           <span
             style={{ float: 'right' }}
             className={
-              'badge ' +
-              (type === 'trash' ? 'badge-dark' : 'badge-success')
+              'badge ' + (type === 'trash' ? 'badge-dark' : 'badge-success')
             }
           >
             {type.charAt(0).toUpperCase() + type.slice(1)}
@@ -47,10 +46,10 @@ const PinItem = ({ pin }) => {
             onClick={() => setCurrent(pin)}
           >
             Edit
-        </button>
+          </button>
           <button className='btn btn-danger btn-sm' onClick={onDelete}>
             Delete
-        </button>
+          </button>
         </p>
       </div>
     </div>

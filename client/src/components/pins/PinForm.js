@@ -28,8 +28,7 @@ const PinForm = () => {
 
   const { name, lat, lng, picUrl, type } = pin;
 
-  const onChange = e =>
-    setPin({ ...pin, [e.target.name]: e.target.value });
+  const onChange = e => setPin({ ...pin, [e.target.name]: e.target.value });
 
   const onSubmit = e => {
     e.preventDefault();
@@ -47,13 +46,11 @@ const PinForm = () => {
 
   return (
     <form onSubmit={onSubmit}>
-      <h2 className='text-primary'>
-        {current ? 'Edit Pin' : 'Add Pin'}
-      </h2>
+      <h2 className='text-primary'>{current ? 'Edit Pin' : 'Add Pin'}</h2>
       <input
         type='text'
         placeholder='Description'
-        name='name'
+        name='description'
         value={name}
         onChange={onChange}
       />

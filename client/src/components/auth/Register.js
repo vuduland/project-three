@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import AlertContext from '../../context/alert/alertContext';
 import AuthContext from '../../context/auth/authContext';
+import '../../App.css';
 
 const Register = props => {
   const alertContext = useContext(AlertContext);
@@ -47,17 +48,25 @@ const Register = props => {
     }
   };
 
+  // <form id="login" action="signup.php" method="post">
+  //   <input type="text" autocomplete="username">
+  //   <input type="password" autocomplete="new-password">
+  //   <input type="password" autocomplete="new-password">
+  //   <input type="submit" value="Sign Up!">
+  // </form>
+
   return (
     <div className='form-container'>
       <h1>
         Account <span className='text-primary'>Register</span>
       </h1>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} id='login' action='signup.php' method='post'>
         <div className='form-group'>
           <label htmlFor='name'>Name</label>
           <input
             id='name'
             type='text'
+            autoComplete='name'
             name='name'
             value={name}
             onChange={onChange}
@@ -65,10 +74,11 @@ const Register = props => {
           />
         </div>
         <div className='form-group'>
-          <label htmlFor='email'>email Address</label>
+          <label htmlFor='email'>Email</label>
           <input
             id='email'
-            type='email'
+            type='text'
+            autoComplete='userName'
             name='email'
             value={email}
             onChange={onChange}
@@ -80,6 +90,7 @@ const Register = props => {
           <input
             id='password'
             type='password'
+            autoComplete='new-password'
             name='password'
             value={password}
             onChange={onChange}
@@ -92,6 +103,7 @@ const Register = props => {
           <input
             id='password2'
             type='password'
+            autoComplete='new-password'
             name='password2'
             value={password2}
             onChange={onChange}

@@ -42,17 +42,53 @@ const Login = props => {
     }
   };
 
+  //   Sign-in Form:
+  // <form id="login" action="login.php" method="post">
+  //   <input type="text" autocomplete="username">
+  //   <input type="password" autocomplete="current-password">
+  //   <input type="submit" value="Sign In!">
+  // </form>
+  // Email First Sign-in Flow:
+  // Collect the email:
+  // <form id="login" action="login.php" method="post">
+  //   <input type="text" autocomplete="username">
+  //   <input type="submit" value="Sign In!">
+  // </form>
+  // Then collect the password, but include the email as the value of a hidden form field:
+  // <style>
+  //   #emailfield { display: none; }
+  // </style>
+  // <form id="login" action="login.php" method="post">
+  //   <input id="emailfield" type="text" value="me@example.test" autocomplete="username">
+  //   <input type="password" autocomplete="current-password">
+  //   <input type="submit" value="Sign In!">
+  // </form>
+  // Sign-up Form:
+  // <form id="login" action="signup.php" method="post">
+  //   <input type="text" autocomplete="username">
+  //   <input type="password" autocomplete="new-password">
+  //   <input type="submit" value="Sign Up!">
+  // </form>
+  // Or:
+  // <form id="login" action="signup.php" method="post">
+  //   <input type="text" autocomplete="username">
+  //   <input type="password" autocomplete="new-password">
+  //   <input type="password" autocomplete="new-password">
+  //   <input type="submit" value="Sign Up!">
+  // </form>
+
   return (
     <div className='form-container'>
       <h1>
         Account <span className='text-primary'>Login</span>
       </h1>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} id='login' action='login.php' method='post'>
         <div className='form-group'>
-          <label htmlFor='email'>Email Address</label>
+          <label htmlFor='email'>Email</label>&nbsp;
           <input
             id='email'
-            type='email'
+            type='text'
+            autoComplete='emailfield'
             name='email'
             value={email}
             onChange={onChange}
@@ -64,6 +100,7 @@ const Login = props => {
           <input
             id='password'
             type='password'
+            autoComplete='current-password'
             name='password'
             value={password}
             onChange={onChange}
