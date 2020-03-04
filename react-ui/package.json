@@ -1,44 +1,35 @@
 {
-  "name": "trashtag",
-  "version": "1.0.0",
-  "description": "",
-  "main": "server.js",
-  "proxy": "http://localhost:5000",
-  "engines": {
-    "node": "10.x"
+  "name": "react-ui",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "axios": "^0.18.1",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-router-dom": "^5.0.0",
+    "react-scripts": "^3.4.0",
+    "react-transition-group": "^4.0.1",
+    "uuid": "^3.3.2"
   },
   "scripts": {
-    "start": "node server",
-    "build": "cd react-ui/ && npm install && npm run build"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
-  "author": "Delia Bouhan, Jay Smith, Peter Smith, & Victor Uland",
-  "cacheDirectories": [
-    "node_modules",
-    "react-ui/node_modules"
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
   ],
-  "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "express-validator": "^5.3.1",
-    "google-maps-react": "^2.0.2",
-    "if-env": "^1.0.4",
-    "jsonwebtoken": "^8.5.1",
-    "materialize-css": "^1.0.0-rc.2",
-    "mongoose": "^5.7.5",
-    "npm": "^6.14.0",
-    "react-materialize": "3.5.9"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/mars/heroku-cra-node.git"
-  },
-  "keywords": [
-    "node",
-    "heroku",
-    "create-react-app",
-    "react"
+  "development": [
+    "last 1 chrome version",
+    "last 1 firefox version",
+    "last 1 safari version"
   ],
-  "license": "ISC",
-  "devDependencies": {}
+  "proxy": "http://localhost:5000"
 }
