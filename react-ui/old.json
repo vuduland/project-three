@@ -20,6 +20,7 @@
     "express": "^4.17.1",
     "express-validator": "^5.3.1",
     "google-maps-react": "^2.0.2",
+    "heroku-client": "^3.1.0",
     "if-env": "^1.0.4",
     "jsonwebtoken": "^8.5.1",
     "materialize-css": "^1.0.0-rc.2",
