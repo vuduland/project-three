@@ -5,13 +5,13 @@
   "main": "server.js",
   "proxy": "http://localhost:5000",
   "scripts": {
-    "start": "if-env NODE_ENV=production && npm run prod || npm run dev",
+    "start": "if-env NODE_ENV=production && yarn run prod || yarn run dev",
     "prod": "node server.js",
-    "dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
+    "dev": "concurrently \"nodemon --ignore 'client/*'\" \"yarn run client\"",
     "server": "nodemon server.js",
-    "client": "cd client && npm run start",
+    "client": "cd client && yarn run start",
     "seed": "node scripts/seedDB.js",
-    "install": "cd client && npm install",
+    "install": "cd client && yarn",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "author": "Delia Bouhan, Jay Smith, Peter Smith, & Victor Uland",
@@ -28,7 +28,7 @@
     "jsonwebtoken": "^8.5.1",
     "materialize-css": "^1.0.0-rc.2",
     "mongoose": "^5.7.5",
-    "npm": "^6.14.0",
+    "npm": "^6.14.4",
     "react-materialize": "3.5.9"
   },
   "devDependencies": {
