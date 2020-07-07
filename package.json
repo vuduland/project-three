@@ -28,7 +28,7 @@
     "jsonwebtoken": "^8.5.1",
     "materialize-css": "^1.0.0-rc.2",
     "mongoose": "^5.7.5",
-    "npm": "^6.14.0",
+    "npm": "^6.14.6",
     "react-materialize": "3.5.9"
   },
   "devDependencies": {
